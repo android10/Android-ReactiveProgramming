@@ -2,6 +2,9 @@
 <resources>
 
     <string name="app_name">Android-ReactivePrograming</string>
-    <string name="hello_world">Hello world!</string>
+
+    <string name="btn_text_add_element">Add Element</string>
+
+    <string name="string_content_description">Non accessible view</string>
 
 </resources>

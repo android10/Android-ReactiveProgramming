@@ -9,13 +9,7 @@ import java.util.Random;
 public class RandomStringGenerator {
 
   private static final int DEFAULT_STRING_LENGHT = 10;
-
-  private final int stringLenght;
-  private final char[] charArray;
-  private final Random random;
-
   private static final char[] symbols;
-
   static {
     StringBuilder tmpSymbols = new StringBuilder();
     for (char ch = 'a'; ch <= 'z'; ch++) {
@@ -23,6 +17,9 @@ public class RandomStringGenerator {
     }
     symbols = tmpSymbols.toString().toCharArray();
   }
+  private final int stringLenght;
+  private final char[] charArray;
+  private final Random random;
 
   public RandomStringGenerator() {
     this(DEFAULT_STRING_LENGHT);

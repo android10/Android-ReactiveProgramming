@@ -10,27 +10,31 @@ import rx.Observable;
 
 public class DataManager {
 
-  private final List<String> usernames;
+  private final List<String> elements;
   private final RandomStringGenerator randomStringGenerator;
 
   public DataManager() {
-    this.usernames = new ArrayList<>();
+    this.elements = new ArrayList<>();
     this.randomStringGenerator = new RandomStringGenerator();
 
     populateUsernameList();
   }
 
-  public Observable<String> getUsernames() {
+  public Observable<String> getElements() {
     return null;
   }
 
+  public List<String> getElementsList() {
+    return this.elements;
+  }
+
   public void addRandomString() {
-    this.usernames.add(randomStringGenerator.nextString());
+    this.elements.add(randomStringGenerator.nextString());
   }
 
   private void populateUsernameList() {
     for (int i = 0; i < 10; i++) {
-      this.usernames.add(randomStringGenerator.nextString());
+      this.elements.add(randomStringGenerator.nextString());
     }
   }
 }
