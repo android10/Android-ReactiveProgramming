@@ -25,8 +25,9 @@ public class DataManager {
     return data;
   }
 
-  public void addRandomString() {
-    this.elements.add(randomStringGenerator.nextString());
+  public Observable<String> getNewElement() {
+    Observable data = Observable.just(randomStringGenerator.nextString());
+    return data;
   }
 
   private void populateUsernameList() {

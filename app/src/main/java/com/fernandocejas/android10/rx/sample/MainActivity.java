@@ -9,6 +9,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Subscription;
+import rx.subscriptions.Subscriptions;
 
 public class MainActivity extends Activity {
 
@@ -34,11 +35,12 @@ public class MainActivity extends Activity {
 
   @Override
   protected void onDestroy() {
-    if (this.subscription != null) { this.subscription.unsubscribe(); }
+    this.subscription.unsubscribe();
     super.onDestroy();
   }
 
   private void initialize() {
+    this.subscription = Subscriptions.empty();
     this.dataManager = new DataManager();
     this.layoutManager = new ElementsLayoutManager(this);
     this.adapter = new ElementsAdapter(this);
@@ -53,6 +55,5 @@ public class MainActivity extends Activity {
   }
 
   @OnClick(android.R.id.button1) void onAddElementClick() {
-    dataManager.addRandomString();
   }
 }
