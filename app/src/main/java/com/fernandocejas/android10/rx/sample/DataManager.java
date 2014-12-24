@@ -21,7 +21,8 @@ public class DataManager {
   }
 
   public Observable<String> getElements() {
-    return null;
+    Observable data = Observable.from(elements);
+    return data;
   }
 
   public List<String> getElementsList() {
