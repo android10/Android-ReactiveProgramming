@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 public class MainActivity extends Activity {
 
+  private DataManager dataManager = new DataManager();
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
