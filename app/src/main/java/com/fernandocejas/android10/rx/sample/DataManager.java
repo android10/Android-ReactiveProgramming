@@ -25,10 +25,6 @@ public class DataManager {
     return data;
   }
 
-  public List<String> getElementsList() {
-    return this.elements;
-  }
-
   public void addRandomString() {
     this.elements.add(randomStringGenerator.nextString());
   }
