@@ -7,7 +7,6 @@ import android.widget.Button;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import rx.Observable;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
@@ -21,7 +20,6 @@ public class MainActivity extends Activity {
   private ElementsLayoutManager layoutManager;
 
   private Subscription subscription;
-  private Observable<String> observable;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +48,10 @@ public class MainActivity extends Activity {
   }
 
   private void fillData() {
-    this.observable = this.dataManager.getElements();
-    this.subscription = this.observable.subscribe(this.adapter);
+    this.subscription = this.dataManager.getElements().subscribe(this.adapter);
   }
 
   @OnClick(android.R.id.button1) void onAddElementClick() {
+    this.subscription = this.dataManager.getNewElement().subscribe(this.adapter);
   }
 }
