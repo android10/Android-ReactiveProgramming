@@ -8,13 +8,16 @@ import java.util.Random;
 
 public class RandomStringGenerator {
 
-  private static final int DEFAULT_STRING_LENGHT = 10;
+  private static final int DEFAULT_STRING_LENGHT = 12;
   private static final char[] symbols;
 
   static {
     StringBuilder tmpSymbols = new StringBuilder();
-    for (char ch = 'a'; ch <= 'z'; ch++) {
-      tmpSymbols.append(ch);
+    for (char numberChar = '0'; numberChar <= '9'; numberChar++) {
+      tmpSymbols.append(numberChar);
+    }
+    for (char letterChar = 'a'; letterChar <= 'z'; letterChar++) {
+      tmpSymbols.append(letterChar);
     }
     symbols = tmpSymbols.toString().toCharArray();
   }
