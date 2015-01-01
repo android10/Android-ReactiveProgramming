@@ -10,6 +10,7 @@ public class RandomStringGenerator {
 
   private static final int DEFAULT_STRING_LENGHT = 10;
   private static final char[] symbols;
+
   static {
     StringBuilder tmpSymbols = new StringBuilder();
     for (char ch = 'a'; ch <= 'z'; ch++) {
@@ -17,6 +18,7 @@ public class RandomStringGenerator {
     }
     symbols = tmpSymbols.toString().toCharArray();
   }
+
   private final int stringLenght;
   private final char[] charArray;
   private final Random random;

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="UseCompoundDrawables"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/selector_item_element"
     android:orientation="horizontal"
     android:padding="@dimen/lv_row_padding"
-    android:background="@drawable/selector_item_element"
+    tools:ignore="UseCompoundDrawables"
     >
 
   <ImageView
       android:id="@+id/avatar"
       android:layout_width="@dimen/lv_row_icon_width"
       android:layout_height="@dimen/lv_row_icon_width"
-      android:src="@drawable/ic_launcher"
+      android:contentDescription="@string/string_content_description"
       android:paddingLeft="@dimen/lv_row_icon_padding"
       android:paddingRight="@dimen/lv_row_icon_padding"
-      android:contentDescription="@string/string_content_description"
+      android:src="@drawable/ic_launcher"
       />
 
   <TextView
       android:id="@+id/title"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:textSize="@dimen/lv_row_text_size"
+      android:ellipsize="end"
       android:gravity="center_vertical"
       android:singleLine="true"
-      android:ellipsize="end"
+      android:textSize="@dimen/lv_row_text_size"
       />
 
 </LinearLayout>

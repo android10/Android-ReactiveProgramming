@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Android-ReactivePrograming</string>
+  <string name="app_name">Android-ReactivePrograming</string>
 
-    <string name="btn_text_add_element">Add Element</string>
+  <string name="btn_text_add_element">Add Element</string>
 
-    <string name="string_content_description">Non accessible view</string>
+  <string name="string_content_description">Non accessible view</string>
 
 </resources>
