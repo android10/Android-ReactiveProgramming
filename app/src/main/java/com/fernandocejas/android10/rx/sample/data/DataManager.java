@@ -11,6 +11,8 @@ import rx.Observable;
 
 public class DataManager {
 
+  private final int[] numbers = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
   private final List<String> elements;
   private final RandomStringGenerator randomStringGenerator;
 
@@ -21,14 +23,16 @@ public class DataManager {
     populateUsernameList();
   }
 
+  public Observable getNumbers() {
+    return Observable.just(numbers);
+  }
+
   public Observable<String> getElements() {
-    Observable data = Observable.from(elements);
-    return data;
+    return Observable.from(elements);
   }
 
   public Observable<String> getNewElement() {
-    Observable data = Observable.just(randomStringGenerator.nextString());
-    return data;
+    return Observable.just(randomStringGenerator.nextString());
   }
 
   private void populateUsernameList() {
