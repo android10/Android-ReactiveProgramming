@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -63,5 +64,6 @@ public class SampleActivityObserver extends Activity {
 
   @OnClick(android.R.id.button1) void onAddElementClick() {
     this.subscription = this.dataManager.getNewElement().subscribe(this.adapter);
+    Toast.makeText(this, "Element added using an observable!!!", Toast.LENGTH_SHORT).show();
   }
 }
