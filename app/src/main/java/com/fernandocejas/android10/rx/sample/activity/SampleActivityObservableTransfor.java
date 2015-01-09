@@ -68,7 +68,7 @@ public class SampleActivityObservableTransfor extends Activity {
       }
 
       @Override public void onCompleted() {
-
+        SampleActivityObservableTransfor.this.showToast("flatMap() Completed!!!");
       }
 
       @Override public void onError(Throwable e) {
@@ -78,7 +78,19 @@ public class SampleActivityObservableTransfor extends Activity {
   }
 
   @OnClick(R.id.btn_concatMap) void onConcatMapClick() {
-    this.buildNumbersObservable().concatMap(SQUARE_OF_NUMBER).subscribe();
+    this.buildNumbersObservable().concatMap(SQUARE_OF_NUMBER).subscribe(new Observer<Integer>() {
+      @Override public void onNext(Integer integer) {
+
+      }
+
+      @Override public void onCompleted() {
+        SampleActivityObservableTransfor.this.showToast("concatMap() Completed!!!");
+      }
+
+      @Override public void onError(Throwable e) {
+        // handle the exception
+      }
+    });
   }
 
   private Observable<Integer> buildNumbersObservable() {
