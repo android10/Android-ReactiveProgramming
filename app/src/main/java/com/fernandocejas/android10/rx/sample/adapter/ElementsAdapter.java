@@ -2,7 +2,7 @@
  * Copyright (C) 2014 android10.org. All rights reserved.
  * @author Fernando Cejas (the android10 coder)
  */
-package com.fernandocejas.android10.rx.sample;
+package com.fernandocejas.android10.rx.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import com.fernandocejas.android10.rx.sample.R;
 import java.util.ArrayList;
 import java.util.List;
 import rx.Observer;

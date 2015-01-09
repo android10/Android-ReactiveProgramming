@@ -1,4 +1,4 @@
-package com.fernandocejas.android10.rx.sample;
+package com.fernandocejas.android10.rx.sample.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,10 +7,14 @@ import android.widget.Button;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import com.fernandocejas.android10.rx.sample.data.DataManager;
+import com.fernandocejas.android10.rx.sample.adapter.ElementsAdapter;
+import com.fernandocejas.android10.rx.sample.view.ElementsLayoutManager;
+import com.fernandocejas.android10.rx.sample.R;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
-public class MainActivity extends Activity {
+public class SampleActivityObserver extends Activity {
 
   @InjectView(android.R.id.list) RecyclerView rv_elements;
   @InjectView(android.R.id.button1) Button btn_AddElement;
