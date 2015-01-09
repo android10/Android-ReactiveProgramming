@@ -2,6 +2,12 @@
 <resources>
 
   <string name="app_name">Android-ReactivePrograming</string>
+  <string name="url">http://www.android10.org/</string>
+
+  <string name="app_sample_observer">Simple Observer Sample</string>
+
+  <string name="btn_text_load_sample_observer">Simple Observer Sample</string>
+  <string name="btn_text_load_sample_observable_transformation">Observable Transform Sample</string>
 
   <string name="btn_text_add_element">Add Element</string>
 

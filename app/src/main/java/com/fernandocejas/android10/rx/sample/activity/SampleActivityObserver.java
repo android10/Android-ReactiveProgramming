@@ -1,6 +1,8 @@
 package com.fernandocejas.android10.rx.sample.activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
@@ -25,10 +27,14 @@ public class SampleActivityObserver extends Activity {
 
   private Subscription subscription;
 
+  public static Intent getCallingIntent(Context context) {
+    return new Intent(context, SampleActivityObserver.class);
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_sample_observer);
 
     ButterKnife.inject(this);
     initialize();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.fernandocejas.android10.rx.sample"
+<manifest
+    package="com.fernandocejas.android10.rx.sample"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
   <application
@@ -12,9 +13,13 @@
         android:label="@string/app_name">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
-
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
+    </activity>
+
+    <activity
+        android:name=".activity.SampleActivityObserver"
+        android:label="@string/app_sample_observer">
     </activity>
   </application>
 
