@@ -6,25 +6,26 @@ package com.fernandocejas.android10.rx.sample.data;
 
 import com.fernandocejas.android10.rx.sample.util.RandomStringGenerator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import rx.Observable;
 
 public class DataManager {
 
-  private final int[] numbers = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
+  private final List<Integer> numbers;
   private final List<String> elements;
   private final RandomStringGenerator randomStringGenerator;
 
   public DataManager() {
+    this.numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
     this.elements = new ArrayList<>();
     this.randomStringGenerator = new RandomStringGenerator();
 
     populateUsernameList();
   }
 
-  public Observable getNumbers() {
-    return Observable.just(numbers);
+  public Observable<Integer> getNumbers() {
+    return Observable.from(numbers);
   }
 
   public Observable<String> getElements() {

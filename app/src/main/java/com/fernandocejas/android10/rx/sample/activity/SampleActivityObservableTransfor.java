@@ -9,12 +9,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.data.DataManager;
+import rx.Observable;
+import rx.Observer;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.subscriptions.Subscriptions;
 
 public class SampleActivityObservableTransfor extends Activity {
@@ -25,6 +30,13 @@ public class SampleActivityObservableTransfor extends Activity {
   private DataManager dataManager;
 
   private Subscription subscription;
+
+  private final Func1<Integer, Observable<Integer>> SQUARE_OF_NUMBER =
+      new Func1<Integer, Observable<Integer>>() {
+        @Override public Observable<Integer> call(Integer number) {
+          return Observable.just(number * number);
+        }
+      };
 
   public static Intent getCallingIntent(Context context) {
     return new Intent(context, SampleActivityObservableTransfor.class);
@@ -50,10 +62,30 @@ public class SampleActivityObservableTransfor extends Activity {
   }
 
   @OnClick(R.id.btn_flatMap) void onFlatMapClick() {
+    this.buildNumbersObservable().flatMap(SQUARE_OF_NUMBER).subscribe(new Observer<Integer>() {
+      @Override public void onNext(Integer number) {
 
+      }
+
+      @Override public void onCompleted() {
+
+      }
+
+      @Override public void onError(Throwable e) {
+        // handle the exception
+      }
+    });
   }
 
   @OnClick(R.id.btn_concatMap) void onConcatMapClick() {
+    this.buildNumbersObservable().concatMap(SQUARE_OF_NUMBER).subscribe();
+  }
 
+  private Observable<Integer> buildNumbersObservable() {
+    return this.dataManager.getNumbers().subscribeOn(AndroidSchedulers.mainThread());
+  }
+
+  private void showToast(String message) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
   }
 }
