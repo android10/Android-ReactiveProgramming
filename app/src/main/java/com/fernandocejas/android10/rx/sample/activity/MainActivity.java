@@ -32,4 +32,8 @@ public class MainActivity extends Activity {
   @OnClick(R.id.btn_sampleObserver) void navigateToObserverSample() {
     this.navigator.navigateToObserverSample(this);
   }
+
+  @OnClick(R.id.btn_sampleObservableTransformation) void navigateToObservableTransformSample() {
+    this.navigator.navigateToObservableTransformSample(this);
+  }
 }

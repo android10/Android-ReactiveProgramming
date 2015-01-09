@@ -5,10 +5,13 @@
   <string name="url">http://www.android10.org/</string>
 
   <string name="app_sample_observer">Simple Observer Sample</string>
+  <string name="app_sample_observable_transform">flatMap() vs concatMap()</string>
 
   <string name="btn_text_load_sample_observer">Simple Observer Sample</string>
   <string name="btn_text_load_sample_observable_transformation">Observable Transform Sample</string>
 
+  <string name="btn_text_flat_map">Observable.flatMap()</string>
+  <string name="btn_text_concat_map">Observable.concatMap()</string>
   <string name="btn_text_add_element">Add Element</string>
 
   <string name="string_content_description">Non accessible view</string>

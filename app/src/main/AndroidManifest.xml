@@ -21,6 +21,13 @@
         android:name=".activity.SampleActivityObserver"
         android:label="@string/app_sample_observer">
     </activity>
+
+    <activity
+        android:name=".activity.SampleActivityObservableTransfor"
+        android:label="@string/app_sample_observable_transform">
+    </activity>
+
+
   </application>
 
 </manifest>

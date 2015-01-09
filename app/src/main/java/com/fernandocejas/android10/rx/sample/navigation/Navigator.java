@@ -6,6 +6,7 @@ package com.fernandocejas.android10.rx.sample.navigation;
 
 import android.content.Context;
 import android.content.Intent;
+import com.fernandocejas.android10.rx.sample.activity.SampleActivityObservableTransfor;
 import com.fernandocejas.android10.rx.sample.activity.SampleActivityObserver;
 
 public class Navigator {
@@ -17,6 +18,13 @@ public class Navigator {
   public void navigateToObserverSample(Context context) {
     if (context != null) {
       Intent intentToLaunch = SampleActivityObserver.getCallingIntent(context);
+      context.startActivity(intentToLaunch);
+    }
+  }
+
+  public void navigateToObservableTransformSample(Context context) {
+    if (context != null) {
+      Intent intentToLaunch = SampleActivityObservableTransfor.getCallingIntent(context);
       context.startActivity(intentToLaunch);
     }
   }
