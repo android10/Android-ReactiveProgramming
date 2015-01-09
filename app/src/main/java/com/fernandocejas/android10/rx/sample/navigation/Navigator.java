@@ -10,7 +10,7 @@ import com.fernandocejas.android10.rx.sample.activity.SampleActivityObserver;
 
 public class Navigator {
 
-  public void Navigator() {
+  public Navigator() {
     //empty
   }
 
