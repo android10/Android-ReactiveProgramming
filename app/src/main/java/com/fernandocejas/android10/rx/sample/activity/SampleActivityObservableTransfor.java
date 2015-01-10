@@ -25,6 +25,8 @@ import rx.subscriptions.Subscriptions;
 
 public class SampleActivityObservableTransfor extends Activity {
 
+  private static final String LOG_TAG = "SampleActivityObservableTransfor";
+
   @InjectView(R.id.btn_flatMap) Button btn_flatMap;
   @InjectView(R.id.btn_concatMap) Button btn_concatMap;
 
@@ -65,12 +67,18 @@ public class SampleActivityObservableTransfor extends Activity {
 
   @OnClick(R.id.btn_flatMap) void onFlatMapClick() {
     this.buildNumbersObservable().flatMap(SQUARE_OF_NUMBER).subscribe(new Observer<Integer>() {
+      final StringBuilder stringBuilder = new StringBuilder(10);
+
       @Override public void onNext(Integer number) {
-        Log.d("onFlatMapClick()", "Number ---------->>>> " + number);
+        stringBuilder.append(number);
+        stringBuilder.append(Character.SPACE_SEPARATOR);
+        debugLog("onFlatMapClick() ------>>>> " + number);
       }
 
       @Override public void onCompleted() {
-        SampleActivityObservableTransfor.this.showToast("flatMap() Completed!!!");
+        stringBuilder.append("Complete!");
+        printFlatMapResult(stringBuilder.toString());
+        showToast("flatMap() Sequence Completed!!!");
       }
 
       @Override public void onError(Throwable e) {
@@ -81,12 +89,18 @@ public class SampleActivityObservableTransfor extends Activity {
 
   @OnClick(R.id.btn_concatMap) void onConcatMapClick() {
     this.buildNumbersObservable().concatMap(SQUARE_OF_NUMBER).subscribe(new Observer<Integer>() {
+      final StringBuilder stringBuilder = new StringBuilder(10);
+
       @Override public void onNext(Integer number) {
-        Log.d("onConcatMapClick()", "Number ---------->>>> " + number);
+        stringBuilder.append(number);
+        stringBuilder.append(Character.SPACE_SEPARATOR);
+        debugLog("onConcatMapClick() ------>>>> " + number);
       }
 
       @Override public void onCompleted() {
-        SampleActivityObservableTransfor.this.showToast("concatMap() Completed!!!");
+        stringBuilder.append("Complete!");
+        printConcatMapResult(stringBuilder.toString());
+        showToast("concatMap() Sequence Completed!!!");
       }
 
       @Override public void onError(Throwable e) {
@@ -101,5 +115,17 @@ public class SampleActivityObservableTransfor extends Activity {
 
   private void showToast(String message) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+  }
+
+  private void debugLog(String message) {
+    Log.d(LOG_TAG, message);
+  }
+
+  private void printConcatMapResult(String result) {
+
+  }
+
+  private void printFlatMapResult(String result) {
+
   }
 }
