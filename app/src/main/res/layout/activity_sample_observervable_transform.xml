@@ -34,11 +34,27 @@
   </RelativeLayout>
 
   <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
       android:orientation="vertical"
       android:layout_above="@id/rl_buttonsHolder"
       >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/string_sample_observable_transformation"
+        />
+
+    <TextView
+        style="@style/AppTheme.TextViewTitle"
+        android:text="@string/tv_label_original_order"
+        />
+    <TextView
+        android:id="@+id/tv_streamOriginalOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
     <TextView
         style="@style/AppTheme.TextViewTitle"

@@ -33,6 +33,10 @@ public class DataManager {
     return Observable.from(numbers);
   }
 
+  public List<Integer> getNumbersSync() {
+    return this.numbers;
+  }
+
   public Observable<Integer> squareOf(int number) {
     return Observable.just(number * number).subscribeOn(Schedulers.from(this.jobExecutor));
   }

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -27,6 +28,11 @@ public class SampleActivityObservableTransfor extends Activity {
 
   private static final String LOG_TAG = "SampleActivityObservableTransfor";
 
+  private static final String SEPARATOR = " ";
+
+  @InjectView(R.id.tv_streamOriginalOrder) TextView tv_streamOriginalOrder;
+  @InjectView(R.id.tv_flatMapResult) TextView tv_flatMapResult;
+  @InjectView(R.id.tv_concatMapResult) TextView tv_concatMapResult;
   @InjectView(R.id.btn_flatMap) Button btn_flatMap;
   @InjectView(R.id.btn_concatMap) Button btn_concatMap;
 
@@ -52,6 +58,7 @@ public class SampleActivityObservableTransfor extends Activity {
 
     ButterKnife.inject(this);
     initialize();
+    populateData();
   }
 
   @Override
@@ -66,12 +73,12 @@ public class SampleActivityObservableTransfor extends Activity {
   }
 
   @OnClick(R.id.btn_flatMap) void onFlatMapClick() {
-    this.buildNumbersObservable().flatMap(SQUARE_OF_NUMBER).subscribe(new Observer<Integer>() {
-      final StringBuilder stringBuilder = new StringBuilder(10);
+    final Observer<Integer> observer = new Observer<Integer>() {
+      final StringBuilder stringBuilder = new StringBuilder(40);
 
       @Override public void onNext(Integer number) {
         stringBuilder.append(number);
-        stringBuilder.append(Character.SPACE_SEPARATOR);
+        stringBuilder.append(SEPARATOR);
         debugLog("onFlatMapClick() ------>>>> " + number);
       }
 
@@ -84,16 +91,19 @@ public class SampleActivityObservableTransfor extends Activity {
       @Override public void onError(Throwable e) {
         // handle the exception
       }
-    });
+    };
+
+    this.buildNumbersObservable().flatMap(SQUARE_OF_NUMBER)
+        .observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
   }
 
   @OnClick(R.id.btn_concatMap) void onConcatMapClick() {
-    this.buildNumbersObservable().concatMap(SQUARE_OF_NUMBER).subscribe(new Observer<Integer>() {
-      final StringBuilder stringBuilder = new StringBuilder(10);
+    final Observer<Integer> observer = new Observer<Integer>() {
+      final StringBuilder stringBuilder = new StringBuilder(40);
 
       @Override public void onNext(Integer number) {
         stringBuilder.append(number);
-        stringBuilder.append(Character.SPACE_SEPARATOR);
+        stringBuilder.append(SEPARATOR);
         debugLog("onConcatMapClick() ------>>>> " + number);
       }
 
@@ -106,11 +116,14 @@ public class SampleActivityObservableTransfor extends Activity {
       @Override public void onError(Throwable e) {
         // handle the exception
       }
-    });
+    };
+
+    this.buildNumbersObservable().concatMap(SQUARE_OF_NUMBER)
+        .observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
   }
 
   private Observable<Integer> buildNumbersObservable() {
-    return this.dataManager.getNumbers().subscribeOn(AndroidSchedulers.mainThread());
+    return this.dataManager.getNumbers();
   }
 
   private void showToast(String message) {
@@ -121,11 +134,20 @@ public class SampleActivityObservableTransfor extends Activity {
     Log.d(LOG_TAG, message);
   }
 
-  private void printConcatMapResult(String result) {
-
+  private void printFlatMapResult(String result) {
+    this.tv_flatMapResult.setText(result);
   }
 
-  private void printFlatMapResult(String result) {
+  private void printConcatMapResult(String result) {
+    this.tv_concatMapResult.setText(result);
+  }
 
+  private void populateData() {
+    StringBuilder stringBuilder = new StringBuilder(15);
+    for (int number : dataManager.getNumbersSync()) {
+      stringBuilder.append(number);
+      stringBuilder.append(SEPARATOR);
+    }
+    this.tv_streamOriginalOrder.setText(stringBuilder.toString());
   }
 }
