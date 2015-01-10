@@ -14,6 +14,9 @@
   <string name="btn_text_concat_map">Observable.concatMap()</string>
   <string name="btn_text_add_element">Add Element</string>
 
+  <string name="tv_label_flatMap_result">flatMap() Result:</string>
+  <string name="tv_label_concatMap_result">concatMap() Result:</string>
+
   <string name="string_content_description">Non accessible view</string>
 
 </resources>
