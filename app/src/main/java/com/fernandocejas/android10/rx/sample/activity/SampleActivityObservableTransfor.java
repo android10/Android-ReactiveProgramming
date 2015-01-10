@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 import butterknife.ButterKnife;
@@ -58,13 +59,14 @@ public class SampleActivityObservableTransfor extends Activity {
   }
 
   private void initialize() {
+    this.dataManager = new DataManager();
     this.subscription = Subscriptions.empty();
   }
 
   @OnClick(R.id.btn_flatMap) void onFlatMapClick() {
     this.buildNumbersObservable().flatMap(SQUARE_OF_NUMBER).subscribe(new Observer<Integer>() {
       @Override public void onNext(Integer number) {
-
+        Log.d("onFlatMapClick()", "Number ---------->>>> " + number);
       }
 
       @Override public void onCompleted() {
@@ -79,8 +81,8 @@ public class SampleActivityObservableTransfor extends Activity {
 
   @OnClick(R.id.btn_concatMap) void onConcatMapClick() {
     this.buildNumbersObservable().concatMap(SQUARE_OF_NUMBER).subscribe(new Observer<Integer>() {
-      @Override public void onNext(Integer integer) {
-
+      @Override public void onNext(Integer number) {
+        Log.d("onConcatMapClick()", "Number ---------->>>> " + number);
       }
 
       @Override public void onCompleted() {

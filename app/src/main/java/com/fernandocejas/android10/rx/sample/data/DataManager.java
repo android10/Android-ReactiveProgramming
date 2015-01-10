@@ -17,7 +17,7 @@ public class DataManager {
   private final RandomStringGenerator randomStringGenerator;
 
   public DataManager() {
-    this.numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    this.numbers = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10));
     this.elements = new ArrayList<>();
     this.randomStringGenerator = new RandomStringGenerator();
 
