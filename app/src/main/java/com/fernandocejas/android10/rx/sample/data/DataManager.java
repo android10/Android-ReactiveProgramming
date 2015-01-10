@@ -4,17 +4,21 @@
  */
 package com.fernandocejas.android10.rx.sample.data;
 
+import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import com.fernandocejas.android10.rx.sample.util.RandomStringGenerator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executor;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 public class DataManager {
 
   private final List<Integer> numbers;
   private final List<String> elements;
   private final RandomStringGenerator randomStringGenerator;
+  private final Executor jobExecutor;
 
   public DataManager() {
     this.numbers = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10));
@@ -22,10 +26,15 @@ public class DataManager {
     this.randomStringGenerator = new RandomStringGenerator();
 
     populateUsernameList();
+    jobExecutor = JobExecutor.getInstance();
   }
 
   public Observable<Integer> getNumbers() {
     return Observable.from(numbers);
+  }
+
+  public Observable<Integer> squareOf(int number) {
+    return Observable.just(number * number).subscribeOn(Schedulers.from(this.jobExecutor));
   }
 
   public Observable<String> getElements() {

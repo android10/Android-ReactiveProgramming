@@ -35,7 +35,7 @@ public class SampleActivityObservableTransfor extends Activity {
   private final Func1<Integer, Observable<Integer>> SQUARE_OF_NUMBER =
       new Func1<Integer, Observable<Integer>>() {
         @Override public Observable<Integer> call(Integer number) {
-          return Observable.just(number * number);
+          return dataManager.squareOf(number);
         }
       };
 
