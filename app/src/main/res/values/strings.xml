@@ -8,6 +8,7 @@
   <string name="app_sample_observable_transform">flatMap() vs concatMap()</string>
 
   <string name="btn_text_load_sample_observer">Simple Observer Sample</string>
+    <string name="btn_text_load_sample_observable">Observable Sample</string>
   <string name="btn_text_load_sample_observable_transformation">Observable Transform Sample</string>
 
   <string name="btn_text_flat_map">Observable.flatMap()</string>
