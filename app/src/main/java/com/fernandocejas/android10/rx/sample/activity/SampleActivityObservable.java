@@ -1,32 +1,18 @@
 package com.fernandocejas.android10.rx.sample.activity;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-import com.fernandocejas.android10.rx.sample.R;
-import com.fernandocejas.android10.rx.sample.adapter.ElementsAdapter;
-import com.fernandocejas.android10.rx.sample.data.DataManager;
-import com.fernandocejas.android10.rx.sample.view.ElementsLayoutManager;
-import rx.Subscription;
-import rx.subscriptions.Subscriptions;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
-import android.widget.Toast;
+import butterknife.ButterKnife;
+import com.fernandocejas.android10.rx.sample.R;
+import com.fernandocejas.android10.rx.sample.data.DataManager;
+import rx.Subscription;
+import rx.subscriptions.Subscriptions;
 
 public class SampleActivityObservable extends Activity {
 
-  @InjectView(android.R.id.list) RecyclerView rv_elements;
-  @InjectView(android.R.id.button1) Button btn_AddElement;
-
   private DataManager dataManager;
-  private ElementsAdapter adapter;
-  private ElementsLayoutManager layoutManager;
-
   private Subscription subscription;
 
   public static Intent getCallingIntent(Context context) {
@@ -36,11 +22,10 @@ public class SampleActivityObservable extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_sample_observer);
+    setContentView(R.layout.activity_sample_observable);
 
     ButterKnife.inject(this);
     initialize();
-    fillData();
   }
 
   @Override
@@ -52,19 +37,5 @@ public class SampleActivityObservable extends Activity {
   private void initialize() {
     this.subscription = Subscriptions.empty();
     this.dataManager = new DataManager();
-    this.layoutManager = new ElementsLayoutManager(this);
-    this.adapter = new ElementsAdapter(this);
-
-    this.rv_elements.setLayoutManager(this.layoutManager);
-    this.rv_elements.setAdapter(this.adapter);
-  }
-
-  private void fillData() {
-    this.subscription = this.dataManager.getElements().subscribe(this.adapter);
-  }
-
-  @OnClick(android.R.id.button1) void onAddElementClick() {
-    this.subscription = this.dataManager.getNewElement().subscribe(this.adapter);
-    Toast.makeText(this, "Element added using an observable!!!", Toast.LENGTH_SHORT).show();
   }
 }

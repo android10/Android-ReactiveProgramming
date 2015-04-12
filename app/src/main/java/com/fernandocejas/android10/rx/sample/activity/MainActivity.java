@@ -11,10 +11,11 @@ import com.fernandocejas.android10.rx.sample.navigation.Navigator;
 
 public class MainActivity extends Activity {
 
-  private Navigator navigator;
-
   @InjectView(R.id.btn_sampleObserver) Button btn_sampleObserver;
+  @InjectView(R.id.btn_sampleObservable) Button btn_sampleObservable;
   @InjectView(R.id.btn_sampleObservableTransformation) Button btn_sampleObservableTransformation;
+
+  private Navigator navigator;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,10 @@ public class MainActivity extends Activity {
 
   @OnClick(R.id.btn_sampleObserver) void navigateToObserverSample() {
     this.navigator.navigateToObserverSample(this);
+  }
+
+  @OnClick(R.id.btn_sampleObservable) void navigateToObservableSample() {
+    this.navigator.navigateToObservableSample(this);
   }
 
   @OnClick(R.id.btn_sampleObservableTransformation) void navigateToObservableTransformSample() {
