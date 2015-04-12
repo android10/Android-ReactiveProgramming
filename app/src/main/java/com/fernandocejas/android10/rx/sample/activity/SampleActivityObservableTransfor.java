@@ -26,9 +26,16 @@ import rx.subscriptions.Subscriptions;
 
 public class SampleActivityObservableTransfor extends Activity {
 
-  private static final String LOG_TAG = "SampleActivityObservableTransfor";
+  private static final String LOG_TAG = "ActivityObservableTrans";
 
   private static final String SEPARATOR = " ";
+
+  private final Func1<Integer, Observable<Integer>> SQUARE_OF_NUMBER =
+      new Func1<Integer, Observable<Integer>>() {
+        @Override public Observable<Integer> call(Integer number) {
+          return dataManager.squareOf(number);
+        }
+      };
 
   @InjectView(R.id.tv_streamOriginalOrder) TextView tv_streamOriginalOrder;
   @InjectView(R.id.tv_flatMapResult) TextView tv_flatMapResult;
@@ -37,15 +44,7 @@ public class SampleActivityObservableTransfor extends Activity {
   @InjectView(R.id.btn_concatMap) Button btn_concatMap;
 
   private DataManager dataManager;
-
   private Subscription subscription;
-
-  private final Func1<Integer, Observable<Integer>> SQUARE_OF_NUMBER =
-      new Func1<Integer, Observable<Integer>>() {
-        @Override public Observable<Integer> call(Integer number) {
-          return dataManager.squareOf(number);
-        }
-      };
 
   public static Intent getCallingIntent(Context context) {
     return new Intent(context, SampleActivityObservableTransfor.class);

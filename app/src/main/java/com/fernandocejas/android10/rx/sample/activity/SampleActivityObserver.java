@@ -10,10 +10,10 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.fernandocejas.android10.rx.sample.data.DataManager;
-import com.fernandocejas.android10.rx.sample.adapter.ElementsAdapter;
-import com.fernandocejas.android10.rx.sample.view.ElementsLayoutManager;
 import com.fernandocejas.android10.rx.sample.R;
+import com.fernandocejas.android10.rx.sample.adapter.ElementsAdapter;
+import com.fernandocejas.android10.rx.sample.data.DataManager;
+import com.fernandocejas.android10.rx.sample.view.ElementsLayoutManager;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 

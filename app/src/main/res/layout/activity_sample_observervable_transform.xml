@@ -28,16 +28,16 @@
         android:id="@+id/btn_concatMap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_text_concat_map"
         android:layout_below="@+id/btn_flatMap"
+        android:text="@string/btn_text_concat_map"
         />
   </RelativeLayout>
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:orientation="vertical"
       android:layout_above="@id/rl_buttonsHolder"
+      android:orientation="vertical"
       >
 
     <TextView
