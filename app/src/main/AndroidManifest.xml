@@ -19,14 +19,16 @@
 
     <activity
         android:name=".activity.SampleActivityObserver"
-        android:label="@string/app_sample_observer">
-    </activity>
+        android:label="@string/app_sample_observer" />
+
+    <activity
+        android:name=".activity.SampleActivityObservable"
+        android:label="@string/app_sample_observable" />
+
 
     <activity
         android:name=".activity.SampleActivityObservableTransfor"
-        android:label="@string/app_sample_observable_transform">
-    </activity>
-
+        android:label="@string/app_sample_observable_transform" />
 
   </application>
 
