@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import rx.Observable;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class DataManager {
@@ -19,6 +20,12 @@ public class DataManager {
   private final List<String> elements;
   private final RandomStringGenerator randomStringGenerator;
   private final Executor jobExecutor;
+
+  private static final Func1<String, String> RANDOM_ITEM_FUNCTION = new Func1<String, String>() {
+    @Override public String call(String string) {
+      return "RandomItem" + string;
+    }
+  };
 
   public DataManager() {
     this.numbers = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10));
@@ -46,7 +53,7 @@ public class DataManager {
   }
 
   public Observable<String> getNewElement() {
-    return Observable.just(randomStringGenerator.nextString());
+    return Observable.just(randomStringGenerator.nextString()).map(RANDOM_ITEM_FUNCTION);
   }
 
   private void populateUsernameList() {
