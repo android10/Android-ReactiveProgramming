@@ -32,17 +32,17 @@
       />
 
   <Button
-      android:id="@+id/btn_sampleBackpressure"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/btn_text_load_sample_observable"
-      />
-
-  <Button
       android:id="@+id/btn_sampleObservableTransformation"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/btn_text_load_sample_observable_transformation"
+      />
+
+  <Button
+      android:id="@+id/btn_sampleBackpressure"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/btn_text_load_sample_backpressure"
       />
 
 </LinearLayout>
