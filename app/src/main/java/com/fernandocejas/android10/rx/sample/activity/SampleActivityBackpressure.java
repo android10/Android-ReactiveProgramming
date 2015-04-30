@@ -10,19 +10,19 @@ import com.fernandocejas.android10.rx.sample.data.DataManager;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
-public class SampleActivityObservable extends Activity {
+public class SampleActivityBackpressure extends Activity {
 
   private DataManager dataManager;
   private Subscription subscription;
 
   public static Intent getCallingIntent(Context context) {
-    return new Intent(context, SampleActivityObservable.class);
+    return new Intent(context, SampleActivityBackpressure.class);
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_sample_observable);
+    setContentView(R.layout.activity_sample_backpressure);
 
     ButterKnife.inject(this);
     initialize();

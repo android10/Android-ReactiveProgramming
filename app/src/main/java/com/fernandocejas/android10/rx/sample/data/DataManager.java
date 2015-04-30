@@ -4,6 +4,7 @@
  */
 package com.fernandocejas.android10.rx.sample.data;
 
+import android.os.SystemClock;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import com.fernandocejas.android10.rx.sample.util.RandomStringGenerator;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import rx.Observable;
+import rx.Subscriber;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -40,11 +42,24 @@ public class DataManager {
     return Observable.from(numbers);
   }
 
+  public Observable<Integer> getNumbersSlow() {
+    return Observable.create(new Observable.OnSubscribe<Integer>() {
+
+      @Override public void call(Subscriber<? super Integer> subscriber) {
+        for (int number : DataManager.this.numbers) {
+          SystemClock.sleep(500);
+          subscriber.onNext(number);
+        }
+        subscriber.onCompleted();
+      }
+    });
+  }
+
   public List<Integer> getNumbersSync() {
     return this.numbers;
   }
 
-  public Observable<Integer> squareOf(int number) {
+  public Observable<Integer> squareOfAsync(int number) {
     return Observable.just(number * number).subscribeOn(Schedulers.from(this.jobExecutor));
   }
 

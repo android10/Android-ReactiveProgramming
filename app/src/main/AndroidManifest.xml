@@ -22,7 +22,7 @@
         android:label="@string/app_sample_observer" />
 
     <activity
-        android:name=".activity.SampleActivityObservable"
+        android:name=".activity.SampleActivityBackpressure"
         android:label="@string/app_sample_observable" />
 
 
