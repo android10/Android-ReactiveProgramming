@@ -9,4 +9,28 @@
     tools:context=".SampleActivityObservable"
     >
 
+  <RelativeLayout
+      android:id="@+id/rl_buttonsHolder"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      >
+
+    <Button
+        android:id="@+id/btn_backpressureSample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="TODO"
+        />
+
+    <Button
+        android:id="@+id/btn_backpressureBuffer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_backpressureSample"
+        android:text="TODO"
+        />
+  </RelativeLayout>
+
 </RelativeLayout>
