@@ -3,18 +3,12 @@ package com.fernandocejas.android10.rx.sample.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
 public class ActivityBackpressureSamples extends BaseActivity {
-
-  @InjectView(R.id.btn_backpressureSample) Button btn_backpressureSample;
-  @InjectView(R.id.btn_backpressureBuffer) Button btn_backpressureBuffer;
 
   private Subscription subscription;
 
@@ -39,8 +33,5 @@ public class ActivityBackpressureSamples extends BaseActivity {
 
   private void initialize() {
     this.subscription = Subscriptions.empty();
-  }
-
-  @OnClick(R.id.btn_backpressureSample) void onButtonSampleClick() {
   }
 }

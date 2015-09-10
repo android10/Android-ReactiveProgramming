@@ -21,7 +21,6 @@ public class ActivitySubscriberSample extends BaseActivity {
 
   private DataManager dataManager;
   private ElementsAdapter adapter;
-  private LinearLayoutManager layoutManager;
 
   private Subscription subscription;
 
@@ -48,10 +47,8 @@ public class ActivitySubscriberSample extends BaseActivity {
   private void initialize() {
     this.subscription = Subscriptions.empty();
     this.dataManager = new DataManager();
-    this.layoutManager = new LinearLayoutManager(this);
     this.adapter = new ElementsAdapter(this);
-
-    this.rv_elements.setLayoutManager(this.layoutManager);
+    this.rv_elements.setLayoutManager(new LinearLayoutManager(this));
     this.rv_elements.setAdapter(this.adapter);
   }
 

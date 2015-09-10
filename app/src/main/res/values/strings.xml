@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="app_name">Android RxJava Samples</string>
+  <string name="app_name">RxJava Samples</string>
   <string name="url">http://www.fernandocejas.com/</string>
 
   <string name="app_sample_observer">Simple Observer Sample</string>
