@@ -1,13 +1,3 @@
-package com.fernandocejas.android10.rx.sample.activity;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import com.fernandocejas.android10.rx.sample.R;
-import com.fernandocejas.android10.rx.sample.navigation.Navigator;
-
 /**
  * Copyright (C) 2015 android10.org Open Source Project
  *
@@ -23,6 +13,16 @@ import com.fernandocejas.android10.rx.sample.navigation.Navigator;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.fernandocejas.android10.rx.sample.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import com.fernandocejas.android10.rx.sample.R;
+import com.fernandocejas.android10.rx.sample.navigation.Navigator;
+
 public class ActivityObservableCompositionSamples extends BaseActivity {
 
   public static Intent getCallingIntent(Context context) {
