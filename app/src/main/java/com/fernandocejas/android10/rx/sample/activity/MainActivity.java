@@ -2,18 +2,12 @@ package com.fernandocejas.android10.rx.sample.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Button;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.navigation.Navigator;
 
 public class MainActivity extends Activity {
-
-  @InjectView(R.id.btn_sampleObserver) Button btn_sampleObserver;
-  @InjectView(R.id.btn_sampleBackpressure) Button btn_sampleObservable;
-  @InjectView(R.id.btn_sampleObservableTransformation) Button btn_sampleObservableTransformation;
 
   private Navigator navigator;
 
@@ -21,7 +15,6 @@ public class MainActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
     ButterKnife.inject(this);
     this.initialize();
   }
@@ -31,14 +24,14 @@ public class MainActivity extends Activity {
   }
 
   @OnClick(R.id.btn_sampleObserver) void navigateToObserverSample() {
-    this.navigator.navigateToObserverSample(this);
+    this.navigator.navigateToSubscriberSample(this);
   }
 
   @OnClick(R.id.btn_sampleBackpressure) void navigateToBackpressureSample() {
-    this.navigator.navigateToBackpressureSample(this);
+    this.navigator.navigateToBackpressureSamples(this);
   }
 
-  @OnClick(R.id.btn_sampleObservableTransformation) void navigateToObservableTransformSample() {
-    this.navigator.navigateToObservableTransformSample(this);
+  @OnClick(R.id.btn_sampleObservableComposition) void navigateToObservableCompositionSamples() {
+    this.navigator.navigateToObservableCompositionSamples(this);
   }
 }

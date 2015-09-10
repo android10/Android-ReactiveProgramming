@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,23 +14,22 @@ import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.adapter.ElementsAdapter;
 import com.fernandocejas.android10.rx.sample.data.DataManager;
-import com.fernandocejas.android10.rx.sample.view.ElementsLayoutManager;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
-public class SampleActivityObserver extends Activity {
+public class ActivitySubscriberSample extends Activity {
 
   @InjectView(android.R.id.list) RecyclerView rv_elements;
   @InjectView(android.R.id.button1) Button btn_AddElement;
 
   private DataManager dataManager;
   private ElementsAdapter adapter;
-  private ElementsLayoutManager layoutManager;
+  private LinearLayoutManager layoutManager;
 
   private Subscription subscription;
 
   public static Intent getCallingIntent(Context context) {
-    return new Intent(context, SampleActivityObserver.class);
+    return new Intent(context, ActivitySubscriberSample.class);
   }
 
   @Override
@@ -51,7 +51,7 @@ public class SampleActivityObserver extends Activity {
   private void initialize() {
     this.subscription = Subscriptions.empty();
     this.dataManager = new DataManager();
-    this.layoutManager = new ElementsLayoutManager(this);
+    this.layoutManager = new LinearLayoutManager(this);
     this.adapter = new ElementsAdapter(this);
 
     this.rv_elements.setLayoutManager(this.layoutManager);

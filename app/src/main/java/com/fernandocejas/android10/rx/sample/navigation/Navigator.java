@@ -6,9 +6,10 @@ package com.fernandocejas.android10.rx.sample.navigation;
 
 import android.content.Context;
 import android.content.Intent;
-import com.fernandocejas.android10.rx.sample.activity.SampleActivityBackpressure;
-import com.fernandocejas.android10.rx.sample.activity.SampleActivityObservableTransfor;
-import com.fernandocejas.android10.rx.sample.activity.SampleActivityObserver;
+import com.fernandocejas.android10.rx.sample.activity.ActivityBackpressureSamples;
+import com.fernandocejas.android10.rx.sample.activity.ActivityObservableCompositionSamples;
+import com.fernandocejas.android10.rx.sample.activity.ActivityObservableConcatVsFlatMapSample;
+import com.fernandocejas.android10.rx.sample.activity.ActivitySubscriberSample;
 
 public class Navigator {
 
@@ -16,23 +17,30 @@ public class Navigator {
     //empty
   }
 
-  public void navigateToObserverSample(Context context) {
+  public void navigateToSubscriberSample(Context context) {
     if (context != null) {
-      Intent intentToLaunch = SampleActivityObserver.getCallingIntent(context);
+      Intent intentToLaunch = ActivitySubscriberSample.getCallingIntent(context);
       context.startActivity(intentToLaunch);
     }
   }
 
-  public void navigateToBackpressureSample(Context context) {
+  public void navigateToObservableCompositionSamples(Context context) {
     if (context != null) {
-      Intent intentToLaunch = SampleActivityBackpressure.getCallingIntent(context);
+      Intent intentToLaunch = ActivityObservableCompositionSamples.getCallingIntent(context);
       context.startActivity(intentToLaunch);
     }
   }
 
-  public void navigateToObservableTransformSample(Context context) {
+  public void navigateToBackpressureSamples(Context context) {
     if (context != null) {
-      Intent intentToLaunch = SampleActivityObservableTransfor.getCallingIntent(context);
+      Intent intentToLaunch = ActivityBackpressureSamples.getCallingIntent(context);
+      context.startActivity(intentToLaunch);
+    }
+  }
+
+  public void navigateToObservableConcatVsFlatMap(Context context) {
+    if (context != null) {
+      Intent intentToLaunch = ActivityObservableConcatVsFlatMapSample.getCallingIntent(context);
       context.startActivity(intentToLaunch);
     }
   }

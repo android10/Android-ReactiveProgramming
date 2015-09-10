@@ -18,17 +18,20 @@
     </activity>
 
     <activity
-        android:name=".activity.SampleActivityObserver"
+        android:name=".activity.ActivitySubscriberSample"
         android:label="@string/app_sample_observer" />
 
     <activity
-        android:name=".activity.SampleActivityBackpressure"
-        android:label="@string/app_sample_backpressure" />
-
+        android:name=".activity.ActivityObservableCompositionSamples"
+        android:label="@string/app_sample_observable_composition" />
 
     <activity
-        android:name=".activity.SampleActivityObservableTransfor"
-        android:label="@string/app_sample_observable_transform" />
+        android:name=".activity.ActivityBackpressureSamples"
+        android:label="@string/app_sample_backpressure" />
+
+    <activity
+        android:name=".activity.ActivityObservableConcatVsFlatMapSample"
+        android:label="@string/app_sample_observable_composition_concat_vs_flat_map" />
 
   </application>
 

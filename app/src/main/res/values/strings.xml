@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="app_name">Android-ReactivePrograming</string>
-  <string name="url">http://www.android10.org/</string>
+  <string name="app_name">Android RxJava Samples</string>
+  <string name="url">http://www.fernandocejas.com/</string>
 
   <string name="app_sample_observer">Simple Observer Sample</string>
-  <string name="app_sample_observable_transform">flatMap() vs concatMap()</string>
-  <string name="app_sample_backpressure">Simple Backpressure Sample</string>
+  <string name="app_sample_observable_composition">Observable Composition Samples</string>
+  <string name="app_sample_backpressure">Backpressure Samples</string>
 
-  <string name="btn_text_load_sample_observer">Simple Observer Sample</string>
-  <string name="btn_text_load_sample_observable_transformation">Observable Transform Sample</string>
-  <string name="btn_text_load_sample_backpressure">Backpressure Sample</string>
+  <string name="app_sample_observable_composition_concat_vs_flat_map">flatMap() vs concatMap()</string>
+
+  <string name="btn_text_load_sample_observer">Observer Sample</string>
+  <string name="btn_text_load_sample_observable_composition">Observable Composition Samples</string>
+  <string name="btn_text_load_sample_backpressure">Backpressure Samples</string>
+
+  <string name="btn_text_add_element">Add Element</string>
 
   <string name="btn_text_flat_map">Observable.flatMap()</string>
   <string name="btn_text_concat_map">Observable.concatMap()</string>
-  <string name="btn_text_add_element">Add Element</string>
-
   <string name="tv_label_original_order">Original stream order:</string>
-  <string name="tv_label_flatMap_result">flatMap() Result:</string>
-  <string name="tv_label_concatMap_result">concatMap() Result:</string>
+  <string name="tv_label_flatMap_result">flatMap() Unordered result:</string>
+  <string name="tv_label_concatMap_result">concatMap() Ordered result:</string>
 
   <string name="string_content_description">Non accessible view</string>
-  <string name="string_sample_observable_transformation">This sample demonstrates an observable transformation by applying a function (square of a number) to a set of values. The basic idea is to see the difference between both flatMap() and concatMap() methods whereas one take care of the order and the other does not.</string>
+  <string name="string_sample_observable_transformation">This sample demonstrates an observable
+    transformation by applying a function (square of a number) to a set of values. The basic idea
+    is to see the difference between both flatMap() and concatMap() methods whereas one take care
+    of the order and the other does not.</string>
 
 </resources>

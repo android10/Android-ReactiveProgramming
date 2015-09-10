@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2015 android10.org. All rights reserved.
+ *
  * @author Fernando Cejas (the android10 coder)
  */
 package com.fernandocejas.android10.rx.sample.activity;
@@ -24,9 +25,9 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.subscriptions.Subscriptions;
 
-public class SampleActivityObservableTransfor extends Activity {
+public class ActivityObservableConcatVsFlatMapSample extends Activity {
 
-  private static final String LOG_TAG = "ActivityObservableTrans";
+  private static final String LOG_TAG = "ConcatVsFlatMap";
 
   private static final String SEPARATOR = " ";
 
@@ -47,13 +48,13 @@ public class SampleActivityObservableTransfor extends Activity {
   private Subscription subscription;
 
   public static Intent getCallingIntent(Context context) {
-    return new Intent(context, SampleActivityObservableTransfor.class);
+    return new Intent(context, ActivityObservableConcatVsFlatMapSample.class);
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_sample_observervable_transform);
+    setContentView(R.layout.activity_sample_observervable_composition_flat_vs_concat);
 
     ButterKnife.inject(this);
     initialize();
