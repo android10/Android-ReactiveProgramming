@@ -1,15 +1,12 @@
 package com.fernandocejas.android10.rx.sample.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.navigation.Navigator;
 
-public class MainActivity extends Activity {
-
-  private Navigator navigator;
+public class MainActivity extends BaseActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

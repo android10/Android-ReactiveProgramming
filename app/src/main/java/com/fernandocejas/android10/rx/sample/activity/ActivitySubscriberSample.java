@@ -1,12 +1,10 @@
 package com.fernandocejas.android10.rx.sample.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
 import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -17,10 +15,9 @@ import com.fernandocejas.android10.rx.sample.data.DataManager;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
-public class ActivitySubscriberSample extends Activity {
+public class ActivitySubscriberSample extends BaseActivity {
 
   @InjectView(android.R.id.list) RecyclerView rv_elements;
-  @InjectView(android.R.id.button1) Button btn_AddElement;
 
   private DataManager dataManager;
   private ElementsAdapter adapter;

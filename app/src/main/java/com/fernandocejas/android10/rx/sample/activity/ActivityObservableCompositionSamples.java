@@ -1,6 +1,5 @@
 package com.fernandocejas.android10.rx.sample.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,9 +23,7 @@ import com.fernandocejas.android10.rx.sample.navigation.Navigator;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class ActivityObservableCompositionSamples extends Activity {
-
-  private Navigator navigator;
+public class ActivityObservableCompositionSamples extends BaseActivity {
 
   public static Intent getCallingIntent(Context context) {
     return new Intent(context, ActivityObservableCompositionSamples.class);

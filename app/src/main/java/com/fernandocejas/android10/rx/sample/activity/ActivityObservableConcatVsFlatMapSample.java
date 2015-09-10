@@ -5,7 +5,6 @@
  */
 package com.fernandocejas.android10.rx.sample.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.subscriptions.Subscriptions;
 
-public class ActivityObservableConcatVsFlatMapSample extends Activity {
+public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
 
   private static final String LOG_TAG = "ConcatVsFlatMap";
 

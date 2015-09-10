@@ -1,6 +1,5 @@
 package com.fernandocejas.android10.rx.sample.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,7 @@ import com.fernandocejas.android10.rx.sample.R;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
-public class ActivityBackpressureSamples extends Activity {
+public class ActivityBackpressureSamples extends BaseActivity {
 
   @InjectView(R.id.btn_backpressureSample) Button btn_backpressureSample;
   @InjectView(R.id.btn_backpressureBuffer) Button btn_backpressureBuffer;
