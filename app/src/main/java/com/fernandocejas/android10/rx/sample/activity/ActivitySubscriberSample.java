@@ -21,8 +21,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.adapter.ElementsAdapter;
@@ -35,7 +35,7 @@ import rx.subscriptions.Subscriptions;
 
 public class ActivitySubscriberSample extends BaseActivity {
 
-  @InjectView(android.R.id.list) RecyclerView rv_elements;
+  @Bind(android.R.id.list) RecyclerView rv_elements;
 
   private LocalDataManager dataManager;
   private ElementsAdapter adapter;
@@ -51,7 +51,7 @@ public class ActivitySubscriberSample extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sample_subscriber);
 
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
     initialize();
     fillData();
   }

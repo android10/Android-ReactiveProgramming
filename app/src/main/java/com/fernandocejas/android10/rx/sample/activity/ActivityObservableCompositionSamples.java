@@ -33,7 +33,7 @@ public class ActivityObservableCompositionSamples extends BaseActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_samples_observable_composition);
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
     this.initialize();
   }
 

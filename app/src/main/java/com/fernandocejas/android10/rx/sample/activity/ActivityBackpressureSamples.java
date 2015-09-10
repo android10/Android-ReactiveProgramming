@@ -36,7 +36,7 @@ public class ActivityBackpressureSamples extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_samples_backpressure);
 
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
     initialize();
   }
 

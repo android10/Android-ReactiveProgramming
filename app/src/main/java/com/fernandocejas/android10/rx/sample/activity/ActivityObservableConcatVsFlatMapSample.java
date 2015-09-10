@@ -21,8 +21,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.data.LocalDataManager;
@@ -49,9 +49,9 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
         }
       };
 
-  @InjectView(R.id.tv_streamOriginalOrder) TextView tv_streamOriginalOrder;
-  @InjectView(R.id.tv_flatMapResult) TextView tv_flatMapResult;
-  @InjectView(R.id.tv_concatMapResult) TextView tv_concatMapResult;
+  @Bind(R.id.tv_streamOriginalOrder) TextView tv_streamOriginalOrder;
+  @Bind(R.id.tv_flatMapResult) TextView tv_flatMapResult;
+  @Bind(R.id.tv_concatMapResult) TextView tv_concatMapResult;
 
   private LocalDataManager dataManager;
   private Subscription subscription;
@@ -65,7 +65,7 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sample_observervable_composition_flat_vs_concat);
 
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
     initialize();
     populateData();
   }

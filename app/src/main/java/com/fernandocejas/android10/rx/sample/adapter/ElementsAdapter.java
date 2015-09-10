@@ -22,8 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.fernandocejas.android10.rx.sample.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,11 +72,11 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.Elemen
   }
 
   static class ElementViewHolder extends RecyclerView.ViewHolder {
-    @InjectView(R.id.title) TextView textViewText;
+    @Bind(R.id.title) TextView textViewText;
 
     public ElementViewHolder(View itemView) {
       super(itemView);
-      ButterKnife.inject(this, itemView);
+      ButterKnife.bind(this, itemView);
     }
   }
 }
