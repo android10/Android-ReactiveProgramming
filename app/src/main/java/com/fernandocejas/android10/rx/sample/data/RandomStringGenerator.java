@@ -47,7 +47,7 @@ public class RandomStringGenerator {
     this.random = new Random();
   }
 
-  public String nextString() {
+  String nextString() {
     for (int i = 0; i < charArray.length; i++) {
       charArray[i] = symbols[random.nextInt(symbols.length)];
     }

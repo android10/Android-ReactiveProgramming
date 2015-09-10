@@ -15,7 +15,6 @@
  */
 package com.fernandocejas.android10.rx.sample.data;
 
-import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +27,9 @@ public class DataManager {
 
   private final List<Integer> numbers;
   private final List<String> elements;
+
   private final RandomStringGenerator randomStringGenerator;
+  private final NumberGenerator numberGenerator;
   private final Executor jobExecutor;
 
   private static final Func1<String, String> RANDOM_ITEM_FUNCTION = new Func1<String, String>() {
@@ -37,20 +38,21 @@ public class DataManager {
     }
   };
 
-  public DataManager() {
+  public DataManager(RandomStringGenerator randomStringGenerator, NumberGenerator numberGenerator,
+      Executor jobExecutor) {
     this.numbers = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10));
     this.elements = new ArrayList<>();
-    this.randomStringGenerator = new RandomStringGenerator();
-
+    this.randomStringGenerator = randomStringGenerator;
+    this.numberGenerator = numberGenerator;
+    this.jobExecutor = jobExecutor;
     populateUsernameList();
-    jobExecutor = JobExecutor.getInstance();
   }
 
-  public Observable<Integer> getNumbers() {
+  public Observable<Integer> numbers() {
     return Observable.from(numbers);
   }
 
-  public List<Integer> getNumbersSync() {
+  public List<Integer> getNumbersSynchronously() {
     return this.numbers;
   }
 
@@ -58,11 +60,11 @@ public class DataManager {
     return Observable.just(number * number).subscribeOn(Schedulers.from(this.jobExecutor));
   }
 
-  public Observable<String> getElements() {
+  public Observable<String> elements() {
     return Observable.from(elements);
   }
 
-  public Observable<String> getNewElement() {
+  public Observable<String> newElement() {
     return Observable.just(randomStringGenerator.nextString()).map(RANDOM_ITEM_FUNCTION);
   }
 

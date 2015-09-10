@@ -19,7 +19,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.ButterKnife;
@@ -27,6 +26,9 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.data.DataManager;
+import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
+import com.fernandocejas.android10.rx.sample.data.RandomStringGenerator;
+import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -50,8 +52,6 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   @InjectView(R.id.tv_streamOriginalOrder) TextView tv_streamOriginalOrder;
   @InjectView(R.id.tv_flatMapResult) TextView tv_flatMapResult;
   @InjectView(R.id.tv_concatMapResult) TextView tv_concatMapResult;
-  @InjectView(R.id.btn_flatMap) Button btn_flatMap;
-  @InjectView(R.id.btn_concatMap) Button btn_concatMap;
 
   private DataManager dataManager;
   private Subscription subscription;
@@ -77,7 +77,8 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   }
 
   private void initialize() {
-    this.dataManager = new DataManager();
+    this.dataManager = new DataManager(new RandomStringGenerator(), new NumberGenerator(),
+        JobExecutor.getInstance());
     this.subscription = Subscriptions.empty();
   }
 
@@ -132,7 +133,7 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   }
 
   private Observable<Integer> buildNumbersObservable() {
-    return this.dataManager.getNumbers();
+    return this.dataManager.numbers();
   }
 
   private void showToast(String message) {
@@ -153,7 +154,7 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
 
   private void populateData() {
     StringBuilder stringBuilder = new StringBuilder(15);
-    for (int number : dataManager.getNumbersSync()) {
+    for (int number : dataManager.getNumbersSynchronously()) {
       stringBuilder.append(number);
       stringBuilder.append(SEPARATOR);
     }

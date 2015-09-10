@@ -22,7 +22,7 @@ import rx.functions.Func2;
 
 public class NumberGenerator {
 
-  public static final Func2<Integer, Integer, Integer> sumNumbers =
+  private static final Func2<Integer, Integer, Integer> sumNumbers =
       new Func2<Integer, Integer, Integer>() {
         @Override public Integer call(Integer integer, Integer integer2) {
           return integer + integer2;
@@ -31,7 +31,7 @@ public class NumberGenerator {
 
   public NumberGenerator() {}
 
-  public Observable<Integer> getResults() {
+  Observable<Integer> results() {
     return Observable.zip(getNumbersFast(), getNumbersSlow(), sumNumbers);
   }
 
