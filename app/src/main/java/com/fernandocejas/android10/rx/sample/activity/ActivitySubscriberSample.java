@@ -46,7 +46,7 @@ public class ActivitySubscriberSample extends BaseActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_sample_observer);
+    setContentView(R.layout.activity_sample_subscriber);
 
     ButterKnife.inject(this);
     initialize();
