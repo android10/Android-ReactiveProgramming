@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
-import com.fernandocejas.android10.rx.sample.data.DataManager;
+import com.fernandocejas.android10.rx.sample.data.LocalDataManager;
 import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
 import com.fernandocejas.android10.rx.sample.data.RandomStringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
@@ -53,7 +53,7 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   @InjectView(R.id.tv_flatMapResult) TextView tv_flatMapResult;
   @InjectView(R.id.tv_concatMapResult) TextView tv_concatMapResult;
 
-  private DataManager dataManager;
+  private LocalDataManager dataManager;
   private Subscription subscription;
 
   public static Intent getCallingIntent(Context context) {
@@ -77,7 +77,7 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   }
 
   private void initialize() {
-    this.dataManager = new DataManager(new RandomStringGenerator(), new NumberGenerator(),
+    this.dataManager = new LocalDataManager(new RandomStringGenerator(), new NumberGenerator(),
         JobExecutor.getInstance());
     this.subscription = Subscriptions.empty();
   }

@@ -26,7 +26,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.adapter.ElementsAdapter;
-import com.fernandocejas.android10.rx.sample.data.DataManager;
+import com.fernandocejas.android10.rx.sample.data.LocalDataManager;
 import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
 import com.fernandocejas.android10.rx.sample.data.RandomStringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
@@ -37,7 +37,7 @@ public class ActivitySubscriberSample extends BaseActivity {
 
   @InjectView(android.R.id.list) RecyclerView rv_elements;
 
-  private DataManager dataManager;
+  private LocalDataManager dataManager;
   private ElementsAdapter adapter;
 
   private Subscription subscription;
@@ -64,7 +64,7 @@ public class ActivitySubscriberSample extends BaseActivity {
 
   private void initialize() {
     this.subscription = Subscriptions.empty();
-    this.dataManager = new DataManager(new RandomStringGenerator(), new NumberGenerator(),
+    this.dataManager = new LocalDataManager(new RandomStringGenerator(), new NumberGenerator(),
         JobExecutor.getInstance());
     this.adapter = new ElementsAdapter(this);
     this.rv_elements.setLayoutManager(new LinearLayoutManager(this));

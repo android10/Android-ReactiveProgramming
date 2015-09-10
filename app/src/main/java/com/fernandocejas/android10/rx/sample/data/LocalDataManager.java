@@ -23,37 +23,34 @@ import rx.Observable;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class DataManager {
-
-  private final List<Integer> numbers;
-  private final List<String> elements;
+public class LocalDataManager {
 
   private final RandomStringGenerator randomStringGenerator;
   private final NumberGenerator numberGenerator;
   private final Executor jobExecutor;
 
-  private static final Func1<String, String> RANDOM_ITEM_FUNCTION = new Func1<String, String>() {
+  private final List<Integer> numbers;
+  private final List<String> elements;
+
+  private static final Func1<String, String> TO_RANDOM_ITEM = new Func1<String, String>() {
     @Override public String call(String string) {
       return "RandomItem" + string;
     }
   };
 
-  public DataManager(RandomStringGenerator randomStringGenerator, NumberGenerator numberGenerator,
+  public LocalDataManager(RandomStringGenerator randomStringGenerator,
+      NumberGenerator numberGenerator,
       Executor jobExecutor) {
     this.numbers = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10));
     this.elements = new ArrayList<>();
     this.randomStringGenerator = randomStringGenerator;
     this.numberGenerator = numberGenerator;
     this.jobExecutor = jobExecutor;
-    populateUsernameList();
+    populateElementsList();
   }
 
   public Observable<Integer> numbers() {
     return Observable.from(numbers);
-  }
-
-  public List<Integer> getNumbersSynchronously() {
-    return this.numbers;
   }
 
   public Observable<Integer> squareOfAsync(int number) {
@@ -65,10 +62,14 @@ public class DataManager {
   }
 
   public Observable<String> newElement() {
-    return Observable.just(randomStringGenerator.nextString()).map(RANDOM_ITEM_FUNCTION);
+    return Observable.just(randomStringGenerator.nextString()).map(TO_RANDOM_ITEM);
   }
 
-  private void populateUsernameList() {
+  public List<Integer> getNumbersSynchronously() {
+    return this.numbers;
+  }
+
+  private void populateElementsList() {
     for (int i = 0; i < 10; i++) {
       this.elements.add(randomStringGenerator.nextString());
     }

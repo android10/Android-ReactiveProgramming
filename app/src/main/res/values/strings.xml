@@ -23,9 +23,17 @@
   <string name="tv_label_concatMap_result">concatMap() Ordered result:</string>
 
   <string name="string_content_description">Non accessible view</string>
-  <string name="string_sample_observable_transformation">This sample demonstrates an observable
-    transformation by applying a function (square of a number) to a set of values. The basic idea
-    is to see the difference between both flatMap() and concatMap() methods whereas one take care
-    of the order and the other does not.</string>
+
+  <string name="string_samples_main">This is a serie of examples regarding reactive programming
+    using RxJava.</string>
+  <string name="string_samples_observable_composition">Examples to demonstrate different approaches
+    and operators when composing and transforming Observables.</string>
+  <string name="string_sample_subscriber">This is a simple example that aims to demonstrate how an
+    adapter can be a subscriber and reacts when a new item is emitted by a source
+    Observable.</string>
+  <string name="string_sample_observable_comp_concat_vs_flat_map">This sample demonstrates an
+    observable transformation by applying a function (square of a number) to a set of values.
+    The basic idea is to see the difference between both flatMap() and concatMap() methods whereas
+    one take care of the order and the other does not.</string>
 
 </resources>
