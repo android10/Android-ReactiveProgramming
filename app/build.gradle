@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
   compileSdkVersion 21
-  buildToolsVersion "21.1.1"
+  buildToolsVersion "21.1.2"
 
   defaultConfig {
     applicationId "com.fernandocejas.android10.rx.sample"
@@ -41,11 +41,10 @@ android {
 }
 
 dependencies {
-  //library dependencies
-  compile 'com.android.support:recyclerview-v7:21.0.+'
-  compile 'com.jakewharton:butterknife:6.0.0'
-  compile 'com.squareup.okhttp:okhttp:2.1.0'
-  compile 'io.reactivex:rxjava:1.0.3'
-  compile 'io.reactivex:rxandroid:0.23.0'
+  compile 'com.android.support:recyclerview-v7:22.2.1'
+  compile 'com.jakewharton:butterknife:7.0.1'
+  compile 'com.squareup.okhttp:okhttp:2.5.0'
+  compile 'io.reactivex:rxjava:1.0.14'
+  compile 'io.reactivex:rxandroid:0.25.0'
 }
 
