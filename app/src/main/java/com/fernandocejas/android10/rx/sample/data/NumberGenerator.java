@@ -18,21 +18,13 @@ package com.fernandocejas.android10.rx.sample.data;
 import android.os.SystemClock;
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Func2;
 
 public class NumberGenerator {
-
-  private static final Func2<Integer, Integer, Integer> sumNumbers =
-      new Func2<Integer, Integer, Integer>() {
-        @Override public Integer call(Integer integer, Integer integer2) {
-          return integer + integer2;
-        }
-      };
 
   public NumberGenerator() {}
 
   Observable<Integer> results() {
-    return Observable.zip(getNumbersFast(), getNumbersSlow(), sumNumbers);
+    return Observable.zip(getNumbersFast(), getNumbersSlow(), (int1, int2) -> int1 + int2);
   }
 
   private Observable<Integer> getNumbersSlow() {

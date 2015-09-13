@@ -33,7 +33,6 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.subscriptions.Subscriptions;
 
 public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
@@ -41,13 +40,6 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   private static final String LOG_TAG = "ConcatVsFlatMap";
 
   private static final String SEPARATOR = " ";
-
-  private final Func1<Integer, Observable<Integer>> SQUARE_OF_NUMBER =
-      new Func1<Integer, Observable<Integer>>() {
-        @Override public Observable<Integer> call(Integer number) {
-          return dataManager.squareOfAsync(number);
-        }
-      };
 
   @Bind(R.id.tv_streamOriginalOrder) TextView tv_streamOriginalOrder;
   @Bind(R.id.tv_flatMapResult) TextView tv_flatMapResult;
@@ -103,8 +95,10 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
       }
     };
 
-    this.buildNumbersObservable().flatMap(SQUARE_OF_NUMBER)
-        .observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+    this.buildNumbersObservable()
+        .flatMap(dataManager::squareOfAsync)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(observer);
   }
 
   @OnClick(R.id.btn_concatMap) void onConcatMapClick() {
@@ -128,8 +122,10 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
       }
     };
 
-    this.buildNumbersObservable().concatMap(SQUARE_OF_NUMBER)
-        .observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+    this.buildNumbersObservable()
+        .concatMap(dataManager::squareOfAsync)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(observer);
   }
 
   private Observable<Integer> buildNumbersObservable() {

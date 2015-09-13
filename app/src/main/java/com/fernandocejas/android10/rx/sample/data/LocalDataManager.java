@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import rx.Observable;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class LocalDataManager {
@@ -31,12 +30,6 @@ public class LocalDataManager {
 
   private final List<Integer> numbers;
   private final List<String> elements;
-
-  private static final Func1<String, String> TO_RANDOM_ITEM = new Func1<String, String>() {
-    @Override public String call(String string) {
-      return "RandomItem" + string;
-    }
-  };
 
   public LocalDataManager(RandomStringGenerator randomStringGenerator,
       NumberGenerator numberGenerator,
@@ -62,7 +55,9 @@ public class LocalDataManager {
   }
 
   public Observable<String> newElement() {
-    return Observable.just(randomStringGenerator.nextString()).map(TO_RANDOM_ITEM);
+    return Observable
+        .just(randomStringGenerator.nextString())
+        .map((string -> "RandomItem" + string));
   }
 
   public List<Integer> getNumbersSynchronously() {
