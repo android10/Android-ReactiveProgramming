@@ -32,22 +32,29 @@ import rx.Observer;
 public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.ElementViewHolder>
     implements Observer<String> {
 
+  public interface ElementAddedListener {
+    void onElementAdded();
+  }
+
   private static final String LOG_TAG = "ElementsAdapter";
 
-  private List<String> elements;
-  private LayoutInflater layoutInflater;
+  private final List<String> elements;
+  private final LayoutInflater layoutInflater;
+  private final ElementAddedListener listener;
 
-  public ElementsAdapter(Context context) {
+  public ElementsAdapter(Context context, ElementAddedListener listener) {
+    if (listener == null) {
+      throw new IllegalArgumentException("Listener cannot be null");
+    }
     this.elements = new ArrayList<>();
     this.layoutInflater =
         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    this.listener = listener;
   }
 
   @Override public ElementViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     final View view = this.layoutInflater.inflate(R.layout.row_element, parent, false);
-    final ElementViewHolder userViewHolder = new ElementViewHolder(view);
-
-    return userViewHolder;
+    return new ElementViewHolder(view);
   }
 
   @Override public void onBindViewHolder(ElementViewHolder holder, int position) {
@@ -65,6 +72,7 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.Elemen
 
   @Override public void onCompleted() {
     notifyDataSetChanged();
+    listener.onElementAdded();
   }
 
   @Override public void onError(Throwable e) {

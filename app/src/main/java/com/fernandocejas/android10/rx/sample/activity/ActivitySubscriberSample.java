@@ -33,7 +33,8 @@ import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
-public class ActivitySubscriberSample extends BaseActivity {
+public class ActivitySubscriberSample extends BaseActivity
+    implements ElementsAdapter.ElementAddedListener {
 
   @Bind(android.R.id.list) RecyclerView rv_elements;
 
@@ -58,25 +59,29 @@ public class ActivitySubscriberSample extends BaseActivity {
 
   @Override
   protected void onDestroy() {
-    this.subscription.unsubscribe();
+    subscription.unsubscribe();
     super.onDestroy();
   }
 
   private void initialize() {
-    this.subscription = Subscriptions.empty();
-    this.dataManager = new LocalDataManager(new RandomStringGenerator(), new NumberGenerator(),
+    subscription = Subscriptions.empty();
+    dataManager = new LocalDataManager(new RandomStringGenerator(), new NumberGenerator(),
         JobExecutor.getInstance());
-    this.adapter = new ElementsAdapter(this);
-    this.rv_elements.setLayoutManager(new LinearLayoutManager(this));
-    this.rv_elements.setAdapter(this.adapter);
+    adapter = new ElementsAdapter(this, this);
+    rv_elements.setLayoutManager(new LinearLayoutManager(this));
+    rv_elements.setAdapter(this.adapter);
   }
 
   private void fillData() {
-    this.subscription = this.dataManager.elements().subscribe(this.adapter);
+    subscription = this.dataManager.elements().subscribe(this.adapter);
   }
 
   @OnClick(android.R.id.button1) void onAddElementClick() {
-    this.subscription = this.dataManager.newElement().subscribe(this.adapter);
+    subscription = this.dataManager.newElement().subscribe(this.adapter);
     Toast.makeText(this, "Element added using an observable!!!", Toast.LENGTH_SHORT).show();
+  }
+
+  @Override public void onElementAdded() {
+    rv_elements.smoothScrollToPosition(adapter.getItemCount());
   }
 }
