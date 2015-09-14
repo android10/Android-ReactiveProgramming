@@ -34,14 +34,14 @@ public class ActivityObservableCompositionSamples extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_samples_observable_composition);
     ButterKnife.bind(this);
-    this.initialize();
+    initialize();
   }
 
   private void initialize() {
-    this.navigator = new Navigator();
+    navigator = new Navigator();
   }
 
   @OnClick(R.id.btn_sampleConcatVsFlatMap) void navigateToObservableConcatVsFlatMap() {
-    this.navigator.navigateToObservableConcatVsFlatMap(this);
+    navigator.navigateToObservableConcatVsFlatMap(this);
   }
 }

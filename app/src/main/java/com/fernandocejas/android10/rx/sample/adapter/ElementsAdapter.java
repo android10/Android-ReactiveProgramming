@@ -53,17 +53,17 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.Elemen
   }
 
   @Override public ElementViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    final View view = this.layoutInflater.inflate(R.layout.row_element, parent, false);
+    final View view = layoutInflater.inflate(R.layout.row_element, parent, false);
     return new ElementViewHolder(view);
   }
 
   @Override public void onBindViewHolder(ElementViewHolder holder, int position) {
-    final String element = this.elements.get(position);
+    final String element = elements.get(position);
     holder.textViewText.setText(element);
   }
 
   @Override public int getItemCount() {
-    return (this.elements != null) ? this.elements.size() : 0;
+    return elements.size();
   }
 
   @Override public void onNext(String stringElement) {

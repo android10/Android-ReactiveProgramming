@@ -47,7 +47,7 @@ public class LocalDataManager {
   }
 
   public Observable<Integer> squareOfAsync(int number) {
-    return Observable.just(number * number).subscribeOn(Schedulers.from(this.jobExecutor));
+    return Observable.just(number * number).subscribeOn(Schedulers.from(jobExecutor));
   }
 
   public Observable<String> elements() {
@@ -61,12 +61,12 @@ public class LocalDataManager {
   }
 
   public List<Integer> getNumbersSynchronously() {
-    return this.numbers;
+    return numbers;
   }
 
   private void populateElementsList() {
     for (int i = 0; i < 10; i++) {
-      this.elements.add(randomStringGenerator.nextString());
+      elements.add(randomStringGenerator.nextString());
     }
   }
 }

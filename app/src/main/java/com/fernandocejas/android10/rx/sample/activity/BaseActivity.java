@@ -24,5 +24,10 @@ public abstract class BaseActivity extends Activity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    initialize();
+  }
+
+  private void initialize() {
+    this.navigator = new Navigator();
   }
 }

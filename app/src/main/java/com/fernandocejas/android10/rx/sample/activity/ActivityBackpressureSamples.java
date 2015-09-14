@@ -42,11 +42,11 @@ public class ActivityBackpressureSamples extends BaseActivity {
 
   @Override
   protected void onDestroy() {
-    this.subscription.unsubscribe();
+    subscription.unsubscribe();
     super.onDestroy();
   }
 
   private void initialize() {
-    this.subscription = Subscriptions.empty();
+    subscription = Subscriptions.empty();
   }
 }

@@ -43,7 +43,7 @@ public class RandomStringGenerator {
 
   public RandomStringGenerator(int stringLength) {
     this.stringLenght = stringLength;
-    this.charArray = new char[this.stringLenght];
+    this.charArray = new char[stringLenght];
     this.random = new Random();
   }
 

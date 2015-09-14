@@ -38,7 +38,6 @@ import rx.subscriptions.Subscriptions;
 public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
 
   private static final String LOG_TAG = "ConcatVsFlatMap";
-
   private static final String SEPARATOR = " ";
 
   @Bind(R.id.tv_streamOriginalOrder) TextView tv_streamOriginalOrder;
@@ -64,14 +63,14 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
 
   @Override
   protected void onDestroy() {
-    this.subscription.unsubscribe();
+    subscription.unsubscribe();
     super.onDestroy();
   }
 
   private void initialize() {
-    this.dataManager = new LocalDataManager(new RandomStringGenerator(), new NumberGenerator(),
+    dataManager = new LocalDataManager(new RandomStringGenerator(), new NumberGenerator(),
         JobExecutor.getInstance());
-    this.subscription = Subscriptions.empty();
+    subscription = Subscriptions.empty();
   }
 
   @OnClick(R.id.btn_flatMap) void onFlatMapClick() {
@@ -95,7 +94,7 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
       }
     };
 
-    this.buildNumbersObservable()
+    buildNumbersObservable()
         .flatMap(dataManager::squareOfAsync)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(observer);
@@ -122,14 +121,14 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
       }
     };
 
-    this.buildNumbersObservable()
+    buildNumbersObservable()
         .concatMap(dataManager::squareOfAsync)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(observer);
   }
 
   private Observable<Integer> buildNumbersObservable() {
-    return this.dataManager.numbers();
+    return dataManager.numbers();
   }
 
   private void showToast(String message) {
@@ -141,11 +140,11 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   }
 
   private void printFlatMapResult(String result) {
-    this.tv_flatMapResult.setText(result);
+    tv_flatMapResult.setText(result);
   }
 
   private void printConcatMapResult(String result) {
-    this.tv_concatMapResult.setText(result);
+    tv_concatMapResult.setText(result);
   }
 
   private void populateData() {
