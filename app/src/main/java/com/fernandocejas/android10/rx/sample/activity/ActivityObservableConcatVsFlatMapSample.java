@@ -29,12 +29,14 @@ import com.fernandocejas.android10.rx.sample.data.LocalDataManager;
 import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
 import com.fernandocejas.android10.rx.sample.data.RandomStringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
+import com.fernandocejas.arrow.annotations.See;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.Subscriptions;
 
+@See(ref = "http://fernandocejas.com/2015/01/11/rxjava-observable-tranformation-concatmap-vs-flatmap/")
 public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
 
   private static final String LOG_TAG = "ConcatVsFlatMap";

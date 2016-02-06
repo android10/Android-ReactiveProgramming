@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-  compileSdkVersion 21
+  compileSdkVersion 23
   buildToolsVersion "21.1.2"
 
   defaultConfig {
@@ -44,10 +44,11 @@ android {
 }
 
 dependencies {
-  compile 'com.android.support:recyclerview-v7:22.2.1'
+  compile 'com.android.support:recyclerview-v7:23.1.1'
   compile 'com.jakewharton:butterknife:7.0.1'
   compile 'com.squareup.okhttp:okhttp:2.5.0'
   compile 'io.reactivex:rxjava:1.0.14'
   compile 'io.reactivex:rxandroid:0.25.0'
+  compile 'com.fernandocejas:arrow:1.0.0'
 }
 
