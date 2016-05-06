@@ -1,17 +1,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     >
 
-  <Button
-      android:id="@+id/btn_sample"
+  <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Sample"
+      android:text="@string/string_sample_backpressure"
       />
+
+  <Button
+      android:id="@+id/btn_backpressureException"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/btn_text_backpressure_exception"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+
+    <TextView
+        style="@style/AppTheme.TextViewTitle"
+        android:text="@string/tv_label_backpressure_sample"
+        />
+    <TextView
+        android:id="@+id/tv_sampleDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        style="@style/AppTheme.TextViewTitle"
+        android:text="@string/tv_label_backpressure_items_emitted"
+        />
+    <TextView
+        android:id="@+id/tv_itemsEmitted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        style="@style/AppTheme.TextViewTitle"
+        android:text="@string/tv_label_backpressure_result"
+        />
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+  </LinearLayout>
 
 </LinearLayout>

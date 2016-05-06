@@ -17,6 +17,7 @@ package com.fernandocejas.android10.rx.sample.data;
 
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
@@ -35,6 +36,10 @@ public class DataManager {
 
   public Observable<Integer> numbers() {
     return Observable.from(numberGenerator.numbers());
+  }
+
+  public Observable<Long> milliseconds() {
+    return Observable.interval(0, 1, TimeUnit.MILLISECONDS);
   }
 
   public Observable<Integer> squareOfAsync(int number) {
