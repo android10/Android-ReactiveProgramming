@@ -19,6 +19,9 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
+import java.util.Arrays;
+import rx.Observable;
 
 public class MainActivity extends BaseActivity {
 
@@ -30,14 +33,27 @@ public class MainActivity extends BaseActivity {
   }
 
   @OnClick(R.id.btn_sampleObserver) void navigateToObserverSample() {
-    navigator.navigateToSubscriberSample(this);
+    //navigator.navigateToSubscriberSample(this);
+    Observable.zip(sampleOne(), sampleTwo(), (integer, integer2) -> integer + integer2).subscribe();
   }
 
   @OnClick(R.id.btn_sampleBackpressure) void navigateToBackpressureSample() {
-    navigator.navigateToBackpressureSamples(this);
+    //navigator.navigateToBackpressureSamples(this);
+    Observable.zip(sampleOne(), sampleTwo(), (integer, integer2) -> integer + integer2
+    ).subscribe();
   }
 
   @OnClick(R.id.btn_sampleObservableComposition) void navigateToObservableCompositionSamples() {
     navigator.navigateToObservableCompositionSamples(this);
+  }
+
+  @RxLogObservable
+  private Observable<Integer> sampleOne() {
+    return Observable.from(Arrays.asList(1, 2, 3, 4, 5));
+  }
+
+  @RxLogObservable
+  private Observable<Integer> sampleTwo() {
+    return Observable.from(Arrays.asList(10, 20, 30, 40, 50));
   }
 }
