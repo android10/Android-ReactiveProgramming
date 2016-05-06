@@ -19,8 +19,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
+import java.util.concurrent.TimeUnit;
+import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 public class ActivityBackpressureSamples extends BaseActivity {
@@ -47,6 +54,42 @@ public class ActivityBackpressureSamples extends BaseActivity {
   }
 
   private void initialize() {
-    subscription = Subscriptions.empty();
+    subscription = Subscriptions.unsubscribed();
+  }
+
+  @OnClick(R.id.btn_sample) void onSampleClick() {
+    //milliseconds().observeOn(AndroidSchedulers.mainThread()).subscribe();
+
+    //final Scheduler scheduler = Schedulers.newThread();
+    //milliseconds()
+    //    .subscribeOn(scheduler)
+    //    .observeOn(scheduler)
+    //    .subscribe();
+
+    milliseconds()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.computation())
+        .subscribe(new BackpressureSubscriber());
+  }
+
+  @RxLogObservable
+  private Observable<Long> milliseconds() {
+    return Observable.interval(0, 1, TimeUnit.MILLISECONDS);
+  }
+
+  private static class BackpressureSubscriber extends Subscriber<Long> {
+    //private final String
+
+    @Override public void onCompleted() {
+
+    }
+
+    @Override public void onError(Throwable e) {
+
+    }
+
+    @Override public void onNext(Long aLong) {
+
+    }
   }
 }

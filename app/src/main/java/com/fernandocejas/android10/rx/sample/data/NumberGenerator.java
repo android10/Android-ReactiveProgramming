@@ -15,40 +15,15 @@
  */
 package com.fernandocejas.android10.rx.sample.data;
 
-import android.os.SystemClock;
-import rx.Observable;
-import rx.Subscriber;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class NumberGenerator {
 
   public NumberGenerator() {}
 
-  Observable<Integer> results() {
-    return Observable.zip(getNumbersFast(), getNumbersSlow(), (int1, int2) -> int1 + int2);
-  }
-
-  private Observable<Integer> getNumbersSlow() {
-    return Observable.create(new Observable.OnSubscribe<Integer>() {
-
-      @Override public void call(Subscriber<? super Integer> subscriber) {
-        for (int i = 1; i < 100000; i++) {
-          SystemClock.sleep(50);
-          subscriber.onNext(i);
-        }
-        subscriber.onCompleted();
-      }
-    });
-  }
-
-  private Observable<Integer> getNumbersFast() {
-    return Observable.create(new Observable.OnSubscribe<Integer>() {
-
-      @Override public void call(Subscriber<? super Integer> subscriber) {
-        for (int i = 1; i < 100000; i++) {
-          subscriber.onNext(i);
-        }
-        subscriber.onCompleted();
-      }
-    });
+  List<Integer> numbers() {
+    return new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10));
   }
 }

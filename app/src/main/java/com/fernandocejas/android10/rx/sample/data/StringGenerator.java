@@ -15,9 +15,11 @@
  */
 package com.fernandocejas.android10.rx.sample.data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class RandomStringGenerator {
+public class StringGenerator {
 
   private static final int DEFAULT_STRING_LENGHT = 12;
   private static final char[] symbols;
@@ -37,14 +39,23 @@ public class RandomStringGenerator {
   private final char[] charArray;
   private final Random random;
 
-  public RandomStringGenerator() {
+  public StringGenerator() {
     this(DEFAULT_STRING_LENGHT);
   }
 
-  public RandomStringGenerator(int stringLength) {
+  public StringGenerator(int stringLength) {
     this.stringLenght = stringLength;
     this.charArray = new char[stringLenght];
     this.random = new Random();
+  }
+
+  List<String> randomStringList() {
+    final int size = 10;
+    final List<String> elements = new ArrayList<>(size);
+    for (int i = 0; i < size; i++) {
+      elements.add(nextString());
+    }
+    return elements;
   }
 
   String nextString() {

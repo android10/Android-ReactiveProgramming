@@ -26,9 +26,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
 import com.fernandocejas.android10.rx.sample.adapter.ElementsAdapter;
-import com.fernandocejas.android10.rx.sample.data.LocalDataManager;
+import com.fernandocejas.android10.rx.sample.data.DataManager;
 import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
-import com.fernandocejas.android10.rx.sample.data.RandomStringGenerator;
+import com.fernandocejas.android10.rx.sample.data.StringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
@@ -38,7 +38,7 @@ public class ActivitySubscriberSample extends BaseActivity
 
   @Bind(android.R.id.list) RecyclerView rv_elements;
 
-  private LocalDataManager dataManager;
+  private DataManager dataManager;
   private ElementsAdapter adapter;
 
   private Subscription subscription;
@@ -64,8 +64,8 @@ public class ActivitySubscriberSample extends BaseActivity
   }
 
   private void initialize() {
-    subscription = Subscriptions.empty();
-    dataManager = new LocalDataManager(new RandomStringGenerator(), new NumberGenerator(),
+    subscription = Subscriptions.unsubscribed();
+    dataManager = new DataManager(new StringGenerator(), new NumberGenerator(),
         JobExecutor.getInstance());
     adapter = new ElementsAdapter(this, this);
     rv_elements.setLayoutManager(new LinearLayoutManager(this));

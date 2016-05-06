@@ -15,35 +15,26 @@
  */
 package com.fernandocejas.android10.rx.sample.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
-public class LocalDataManager {
+public class DataManager {
 
-  private final RandomStringGenerator randomStringGenerator;
+  private final StringGenerator stringGenerator;
   private final NumberGenerator numberGenerator;
   private final Executor jobExecutor;
 
-  private final List<Integer> numbers;
-  private final List<String> elements;
-
-  public LocalDataManager(RandomStringGenerator randomStringGenerator,
-      NumberGenerator numberGenerator,
-      Executor jobExecutor) {
-    this.numbers = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10));
-    this.elements = new ArrayList<>();
-    this.randomStringGenerator = randomStringGenerator;
+  public DataManager(StringGenerator stringGenerator,
+      NumberGenerator numberGenerator, Executor jobExecutor) {
+    this.stringGenerator = stringGenerator;
     this.numberGenerator = numberGenerator;
     this.jobExecutor = jobExecutor;
-    populateElementsList();
   }
 
   public Observable<Integer> numbers() {
-    return Observable.from(numbers);
+    return Observable.from(numberGenerator.numbers());
   }
 
   public Observable<Integer> squareOfAsync(int number) {
@@ -51,22 +42,16 @@ public class LocalDataManager {
   }
 
   public Observable<String> elements() {
-    return Observable.from(elements);
+    return Observable.from(stringGenerator.randomStringList());
   }
 
   public Observable<String> newElement() {
     return Observable
-        .just(randomStringGenerator.nextString())
+        .just(stringGenerator.nextString())
         .map((string -> "RandomItem" + string));
   }
 
   public List<Integer> getNumbersSynchronously() {
-    return numbers;
-  }
-
-  private void populateElementsList() {
-    for (int i = 0; i < 10; i++) {
-      elements.add(randomStringGenerator.nextString());
-    }
+    return numberGenerator.numbers();
   }
 }

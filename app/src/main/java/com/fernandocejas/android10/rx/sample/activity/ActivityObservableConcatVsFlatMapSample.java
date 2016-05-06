@@ -25,9 +25,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.fernandocejas.android10.rx.sample.R;
-import com.fernandocejas.android10.rx.sample.data.LocalDataManager;
+import com.fernandocejas.android10.rx.sample.data.DataManager;
 import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
-import com.fernandocejas.android10.rx.sample.data.RandomStringGenerator;
+import com.fernandocejas.android10.rx.sample.data.StringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import com.fernandocejas.arrow.annotations.See;
 import rx.Observable;
@@ -46,7 +46,7 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   @Bind(R.id.tv_flatMapResult) TextView tv_flatMapResult;
   @Bind(R.id.tv_concatMapResult) TextView tv_concatMapResult;
 
-  private LocalDataManager dataManager;
+  private DataManager dataManager;
   private Subscription subscription;
 
   public static Intent getCallingIntent(Context context) {
@@ -70,9 +70,9 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   }
 
   private void initialize() {
-    dataManager = new LocalDataManager(new RandomStringGenerator(), new NumberGenerator(),
+    dataManager = new DataManager(new StringGenerator(), new NumberGenerator(),
         JobExecutor.getInstance());
-    subscription = Subscriptions.empty();
+    subscription = Subscriptions.unsubscribed();
   }
 
   @OnClick(R.id.btn_flatMap) void onFlatMapClick() {
