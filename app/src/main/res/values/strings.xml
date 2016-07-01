@@ -41,7 +41,7 @@
     one take care of the order and the other does not.</string>
   <string name="string_sample_backpressure">In RxJava it is not difficult to get into a situation
     in which an Observable is emitting items more rapidly than an operator or subscriber can
-    consume them. \nCheck also logcat for more loggin information.\n</string>
+    consume them. \nCheck also logcat for more logging information.\n</string>
   <string name="string_success">Success!</string>
   <string name="string_failure">Failure! %1$s</string>
 
