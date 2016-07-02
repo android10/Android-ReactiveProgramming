@@ -91,14 +91,15 @@ public class ActivityBackpressureSamples extends BaseActivity implements
     dataManager.milliseconds(1000)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber(this, getString(R.string.btn_text_backpressure_exception)));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_exception)));
   }
 
-  @OnClick(R.id.btn_backpressureOperator) void onAnotherExampleClick() {
-    dataManager.seconds(5)
+  @OnClick(R.id.btn_backpressureDrop) void onBackpressureDropClick() {
+    dataManager.milliseconds(1000)
+        .onBackpressureDrop()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber(this, "Another sample", 10));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_drop), 30));
   }
 
   @Override

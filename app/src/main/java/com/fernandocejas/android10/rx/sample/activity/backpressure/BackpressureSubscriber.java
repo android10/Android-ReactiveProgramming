@@ -21,7 +21,7 @@ import rx.Subscriber;
 import rx.exceptions.MissingBackpressureException;
 
 @RxLogSubscriber
-class BackpressureSubscriber extends Subscriber<Long> {
+class BackpressureSubscriber<T> extends Subscriber<T> {
 
   interface BackPressureResultListener {
     void onOperationStart(String name, long itemsRequested);
@@ -32,6 +32,7 @@ class BackpressureSubscriber extends Subscriber<Long> {
   private final WeakReference<BackPressureResultListener> backPressureListener;
   private final String name;
   private final long itemsRequested;
+  private boolean shouldRequestItem;
 
   private long itemsEmitted = 0;
 
@@ -43,17 +44,18 @@ class BackpressureSubscriber extends Subscriber<Long> {
     this.backPressureListener = new WeakReference<>(listener);
     this.name = name;
     this.itemsRequested = requestedItems;
+    this.shouldRequestItem = requestedItems != Long.MAX_VALUE;
   }
 
   @Override public void onStart() {
-    request(itemsRequested);
+    requestItems();
     sendStartData();
   }
 
-  @Override public void onNext(Long item) {
+  @Override public void onNext(T item) {
     itemsEmitted++;
     sendProgressData(itemsEmitted);
-    request(itemsRequested);
+    requestItems();
   }
 
   @Override public void onCompleted() {
@@ -63,6 +65,12 @@ class BackpressureSubscriber extends Subscriber<Long> {
   @Override public void onError(Throwable throwable) {
     if (throwable instanceof MissingBackpressureException) {
       sendResultData(OperationResult.failure(throwable));
+    }
+  }
+
+  private void requestItems() {
+    if (shouldRequestItem) {
+      request(itemsRequested);
     }
   }
 

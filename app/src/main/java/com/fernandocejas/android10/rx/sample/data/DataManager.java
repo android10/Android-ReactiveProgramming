@@ -38,10 +38,6 @@ public class DataManager {
     return Observable.from(numberGenerator.numbers());
   }
 
-  public Observable<Long> seconds(int upUntil) {
-    return Observable.interval(0, 1, TimeUnit.SECONDS).take(upUntil);
-  }
-
   public Observable<Long> milliseconds(int upUntil) {
     return Observable.interval(0, 1, TimeUnit.MILLISECONDS).take(upUntil);
   }

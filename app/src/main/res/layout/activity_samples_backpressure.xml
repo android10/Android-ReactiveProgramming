@@ -22,10 +22,10 @@
       />
 
   <Button
-      android:id="@+id/btn_backpressureOperator"
+      android:id="@+id/btn_backpressureDrop"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Another Test"
+      android:text="@string/btn_text_backpressure_drop"
       />
 
   <LinearLayout
