@@ -26,7 +26,7 @@
         android:label="@string/app_sample_observable_composition" />
 
     <activity
-        android:name=".activity.ActivityBackpressureSamples"
+        android:name=".activity.backpressure.ActivityBackpressureSamples"
         android:label="@string/app_sample_backpressure" />
 
     <activity

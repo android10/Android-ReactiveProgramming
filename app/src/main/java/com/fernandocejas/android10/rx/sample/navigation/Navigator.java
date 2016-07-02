@@ -17,7 +17,7 @@ package com.fernandocejas.android10.rx.sample.navigation;
 
 import android.content.Context;
 import android.content.Intent;
-import com.fernandocejas.android10.rx.sample.activity.ActivityBackpressureSamples;
+import com.fernandocejas.android10.rx.sample.activity.backpressure.ActivityBackpressureSamples;
 import com.fernandocejas.android10.rx.sample.activity.ActivityObservableCompositionSamples;
 import com.fernandocejas.android10.rx.sample.activity.ActivityObservableConcatVsFlatMapSample;
 import com.fernandocejas.android10.rx.sample.activity.ActivitySubscriberSample;

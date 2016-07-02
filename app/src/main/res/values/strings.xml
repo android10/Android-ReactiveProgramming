@@ -22,6 +22,8 @@
   <string name="tv_label_flatMap_result">flatMap() Unordered result:</string>
   <string name="tv_label_concatMap_result">concatMap() Ordered result:</string>
   <string name="tv_label_backpressure_sample">Sample:</string>
+  <string name="tv_label_backpressure_items_requested">Items requested:</string>
+  <string name="tv_label_backpressure_items_processed">Items processed:</string>
   <string name="tv_label_backpressure_items_emitted">Items emitted:</string>
   <string name="tv_label_backpressure_result">Result:</string>
   <string name="btn_text_backpressure_exception">Backpressure exception</string>
@@ -39,9 +41,7 @@
     observable transformation by applying a function (square of a number) to a set of values.
     The basic idea is to see the difference between both flatMap() and concatMap() methods whereas
     one take care of the order and the other does not.</string>
-  <string name="string_sample_backpressure">In RxJava it is not difficult to get into a situation
-    in which an Observable is emitting items more rapidly than an operator or subscriber can
-    consume them. \nCheck also logcat for more logging information.\n</string>
+  <string name="string_sample_backpressure">Link to the article: </string>
   <string name="string_success">Success!</string>
   <string name="string_failure">Failure! %1$s</string>
 

@@ -21,6 +21,13 @@
       android:text="@string/btn_text_backpressure_exception"
       />
 
+  <Button
+      android:id="@+id/btn_backpressureOperator"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Another Test"
+      />
+
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -33,6 +40,26 @@
         />
     <TextView
         android:id="@+id/tv_sampleDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        style="@style/AppTheme.TextViewTitle"
+        android:text="@string/tv_label_backpressure_items_requested"
+        />
+    <TextView
+        android:id="@+id/tv_itemsRequested"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        style="@style/AppTheme.TextViewTitle"
+        android:text="@string/tv_label_backpressure_items_processed"
+        />
+    <TextView
+        android:id="@+id/tv_itemsProcessed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
