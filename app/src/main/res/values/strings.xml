@@ -28,6 +28,7 @@
   <string name="tv_label_backpressure_result">Result:</string>
   <string name="btn_text_backpressure_exception">Backpressure exception</string>
   <string name="btn_text_backpressure_drop">Backpressure drop items</string>
+  <string name="btn_text_backpressure_buffer">Backpressure buffer items</string>
 
   <string name="string_content_description">Non accessible view</string>
 
