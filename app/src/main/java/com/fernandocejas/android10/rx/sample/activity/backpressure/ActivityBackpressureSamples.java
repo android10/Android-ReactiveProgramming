@@ -110,6 +110,13 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_buffer)));
   }
 
+  @OnClick(R.id.btn_backpressureRequest) void onBackpressureRequest() {
+    dataManager.milliseconds(1000)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.computation())
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_request)));
+  }
+
   @Override
   public void onOperationStart(String name, long itemsRequested) {
     clearUpUI();

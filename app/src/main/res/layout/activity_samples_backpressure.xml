@@ -35,6 +35,13 @@
       android:text="@string/btn_text_backpressure_buffer"
       />
 
+  <Button
+      android:id="@+id/btn_backpressureRequest"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/btn_text_backpressure_request"
+      />
+
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
