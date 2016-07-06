@@ -99,7 +99,7 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .onBackpressureDrop()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_drop)));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_drop), 1000));
   }
 
   @OnClick(R.id.btn_backpressureBuffer) void onBackpressureBuffer() {
@@ -107,15 +107,15 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .onBackpressureBuffer(200)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_buffer)));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_buffer), 600));
   }
 
-  @OnClick(R.id.btn_backpressureRequest) void onBackpressureRequest() {
-    //TODO: implement sample
+  @OnClick(R.id.btn_backpressureToList) void onBackpressureToList() {
     dataManager.milliseconds(1000)
+        .toList()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_request)));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_tolist), 1000));
   }
 
   @Override

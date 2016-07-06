@@ -36,10 +36,10 @@
       />
 
   <Button
-      android:id="@+id/btn_backpressureRequest"
+      android:id="@+id/btn_backpressureToList"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/btn_text_backpressure_request"
+      android:text="@string/btn_text_backpressure_tolist"
       />
 
   <LinearLayout
