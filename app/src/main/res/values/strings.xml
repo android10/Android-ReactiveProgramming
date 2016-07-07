@@ -26,10 +26,11 @@
   <string name="tv_label_backpressure_items_processed">Items processed:</string>
   <string name="tv_label_backpressure_items_emitted">Items emitted:</string>
   <string name="tv_label_backpressure_result">Result:</string>
-  <string name="btn_text_backpressure_exception">Backpressure exception</string>
-  <string name="btn_text_backpressure_drop">Backpressure drop items</string>
-  <string name="btn_text_backpressure_buffer">Backpressure buffer items</string>
-  <string name="btn_text_backpressure_tolist">Backpressure toList</string>
+  <string name="btn_text_backpressure_exception">Backpressure Exception</string>
+  <string name="btn_text_backpressure_drop">Backpressure Drop Items</string>
+  <string name="btn_text_backpressure_buffer">Backpressure Buffer Items</string>
+  <string name="btn_text_backpressure_toList">Backpressure To List</string>
+  <string name="btn_text_backpressure_throttleLast">Backpressure Throttle Last</string>
 
   <string name="string_content_description">Non accessible view</string>
 

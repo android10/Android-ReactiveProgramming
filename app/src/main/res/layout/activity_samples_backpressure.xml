@@ -39,7 +39,14 @@
       android:id="@+id/btn_backpressureToList"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/btn_text_backpressure_tolist"
+      android:text="@string/btn_text_backpressure_toList"
+      />
+
+  <Button
+      android:id="@+id/btn_backpressureThrottleLast"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/btn_text_backpressure_throttleLast"
       />
 
   <LinearLayout

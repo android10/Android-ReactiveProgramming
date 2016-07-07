@@ -17,6 +17,8 @@ package com.fernandocejas.android10.rx.sample.activity.backpressure;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
 import com.fernandocejas.android10.rx.sample.data.StringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import com.fernandocejas.arrow.strings.Strings;
+import java.util.concurrent.TimeUnit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -115,7 +118,15 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .toList()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_tolist), 1000));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_toList), 1000));
+  }
+
+  @OnClick(R.id.btn_backpressureThrottleLast) void onBackpressureThrottleLast() {
+    dataManager.milliseconds(10000)
+        .throttleLast(10, TimeUnit.MILLISECONDS)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.computation())
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_throttleLast), 10000));
   }
 
   @Override
@@ -133,21 +144,25 @@ public class ActivityBackpressureSamples extends BaseActivity implements
   @Override
   public void onOperationResult(long itemsEmitted, OperationResult operation) {
     tv_itemsEmitted.setText(String.valueOf(itemsEmitted));
-    String resultMessage = Strings.EMPTY;
     switch (operation.result()) {
       case SUCCESS:
-        resultMessage = getString(R.string.string_success);
+        tv_result.setText(getString(R.string.string_success));
+        tv_result.setTextColor(ColorStateList.valueOf(Color.BLUE));
         break;
       case FAILURE:
+        String failureMessage;
         if (operation.throwable().isPresent()) {
-          resultMessage = String.format(getString(R.string.string_failure),
+          failureMessage = String.format(getString(R.string.string_failure),
               operation.throwable().get().toString());
         } else {
-          resultMessage = getString(R.string.string_failure);
+          failureMessage = getString(R.string.string_failure);
         }
+        tv_result.setText(failureMessage);
+        tv_result.setTextColor(ColorStateList.valueOf(Color.RED));
         break;
+      default:
+        tv_result.setText(Strings.EMPTY);
     }
-    tv_result.setText(resultMessage);
     toggleProgressBar(false);
   }
 }
