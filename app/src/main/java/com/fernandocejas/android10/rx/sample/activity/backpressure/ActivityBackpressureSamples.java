@@ -21,6 +21,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,6 +42,7 @@ import rx.subscriptions.Subscriptions;
 public class ActivityBackpressureSamples extends BaseActivity implements
     BackpressureSubscriber.BackPressureResultListener {
 
+  @Bind(R.id.sv_container) ScrollView sv_container;
   @Bind(R.id.tv_sampleDescription) TextView tv_sampleDescription;
   @Bind(R.id.tv_itemsRequested) TextView tv_itemsRequested;
   @Bind(R.id.tv_itemsProcessed) TextView tv_itemsProcessed;
@@ -141,6 +143,7 @@ public class ActivityBackpressureSamples extends BaseActivity implements
   public void onOperationStart(String name, long itemsRequested) {
     clearUpUI();
     toggleProgressBar(true);
+    sv_container.fullScroll(ScrollView.FOCUS_DOWN);
     tv_sampleDescription.setText(name);
     tv_itemsRequested.setText(String.valueOf(itemsRequested));
   }
