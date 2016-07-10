@@ -29,6 +29,7 @@
   <string name="btn_text_backpressure_exception">Backpressure Exception</string>
   <string name="btn_text_backpressure_drop">Backpressure Drop Items</string>
   <string name="btn_text_backpressure_buffer">Backpressure Buffer Items</string>
+  <string name="btn_text_backpressure_window">Backpressure Window Items</string>
   <string name="btn_text_backpressure_toList">Backpressure To List</string>
   <string name="btn_text_backpressure_throttleLast">Backpressure Throttle Last</string>
 

@@ -113,6 +113,14 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_buffer), 600));
   }
 
+  @OnClick(R.id.btn_backpressureWindow) void onBackpressureWindow() {
+    dataManager.milliseconds(1000)
+        .window(5)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.computation())
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_window)));
+  }
+
   @OnClick(R.id.btn_backpressureToList) void onBackpressureToList() {
     dataManager.milliseconds(1000)
         .toList()

@@ -1,110 +1,123 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     >
-
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/string_sample_backpressure"
-      />
-
-  <Button
-      android:id="@+id/btn_backpressureException"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/btn_text_backpressure_exception"
-      />
-
-  <Button
-      android:id="@+id/btn_backpressureDrop"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/btn_text_backpressure_drop"
-      />
-
-  <Button
-      android:id="@+id/btn_backpressureBuffer"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/btn_text_backpressure_buffer"
-      />
-
-  <Button
-      android:id="@+id/btn_backpressureToList"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/btn_text_backpressure_toList"
-      />
-
-  <Button
-      android:id="@+id/btn_backpressureThrottleLast"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/btn_text_backpressure_throttleLast"
-      />
 
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:orientation="vertical"
+      android:paddingBottom="@dimen/activity_vertical_margin"
+      android:paddingLeft="@dimen/activity_horizontal_margin"
+      android:paddingRight="@dimen/activity_horizontal_margin"
+      android:paddingTop="@dimen/activity_vertical_margin"
       >
 
     <TextView
-        style="@style/AppTheme.TextViewTitle"
-        android:text="@string/tv_label_backpressure_sample"
-        />
-    <TextView
-        android:id="@+id/tv_sampleDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/string_sample_backpressure"
         />
 
-    <TextView
-        style="@style/AppTheme.TextViewTitle"
-        android:text="@string/tv_label_backpressure_items_requested"
-        />
-    <TextView
-        android:id="@+id/tv_itemsRequested"
+    <Button
+        android:id="@+id/btn_backpressureException"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/btn_text_backpressure_exception"
         />
 
-    <TextView
-        style="@style/AppTheme.TextViewTitle"
-        android:text="@string/tv_label_backpressure_items_processed"
-        />
-    <TextView
-        android:id="@+id/tv_itemsProcessed"
+    <Button
+        android:id="@+id/btn_backpressureDrop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/btn_text_backpressure_drop"
         />
 
-    <TextView
-        style="@style/AppTheme.TextViewTitle"
-        android:text="@string/tv_label_backpressure_items_emitted"
-        />
-    <TextView
-        android:id="@+id/tv_itemsEmitted"
+    <Button
+        android:id="@+id/btn_backpressureBuffer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/btn_text_backpressure_buffer"
         />
 
-    <TextView
-        style="@style/AppTheme.TextViewTitle"
-        android:text="@string/tv_label_backpressure_result"
-        />
-    <TextView
-        android:id="@+id/tv_result"
+    <Button
+        android:id="@+id/btn_backpressureWindow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/btn_text_backpressure_window"
         />
+
+    <Button
+        android:id="@+id/btn_backpressureToList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_text_backpressure_toList"
+        />
+
+    <Button
+        android:id="@+id/btn_backpressureThrottleLast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_text_backpressure_throttleLast"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+      <TextView
+          style="@style/AppTheme.TextViewTitle"
+          android:text="@string/tv_label_backpressure_sample"
+          />
+      <TextView
+          android:id="@+id/tv_sampleDescription"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          style="@style/AppTheme.TextViewTitle"
+          android:text="@string/tv_label_backpressure_items_requested"
+          />
+      <TextView
+          android:id="@+id/tv_itemsRequested"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          style="@style/AppTheme.TextViewTitle"
+          android:text="@string/tv_label_backpressure_items_processed"
+          />
+      <TextView
+          android:id="@+id/tv_itemsProcessed"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          style="@style/AppTheme.TextViewTitle"
+          android:text="@string/tv_label_backpressure_items_emitted"
+          />
+      <TextView
+          android:id="@+id/tv_itemsEmitted"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          style="@style/AppTheme.TextViewTitle"
+          android:text="@string/tv_label_backpressure_result"
+          />
+      <TextView
+          android:id="@+id/tv_result"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+
+    </LinearLayout>
 
   </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
