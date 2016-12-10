@@ -93,10 +93,14 @@ public class ActivityBackpressureSamples extends BaseActivity implements
   }
 
   @OnClick(R.id.btn_backpressureException) void onBackpressureExceptionClick() {
-    dataManager.milliseconds(1000)
+    //dataManager.milliseconds(1000)
+    //    .observeOn(AndroidSchedulers.mainThread())
+    //    .subscribeOn(Schedulers.computation())
+    //    .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_exception)));
+    dataManager.milliseconds(100)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_exception)));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_exception), 15));
   }
 
   @OnClick(R.id.btn_backpressureDrop) void onBackpressureDropClick() {
@@ -104,7 +108,7 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .onBackpressureDrop()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_drop), 1000));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_drop)));
   }
 
   @OnClick(R.id.btn_backpressureBuffer) void onBackpressureBuffer() {
@@ -112,7 +116,7 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .onBackpressureBuffer(200)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_buffer), 600));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_buffer)));
   }
 
   @OnClick(R.id.btn_backpressureWindow) void onBackpressureWindow() {
@@ -128,7 +132,7 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .toList()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_toList), 1000));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_toList)));
   }
 
   @OnClick(R.id.btn_backpressureThrottleLast) void onBackpressureThrottleLast() {
@@ -136,7 +140,7 @@ public class ActivityBackpressureSamples extends BaseActivity implements
         .throttleLast(10, TimeUnit.MILLISECONDS)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_throttleLast), 10000));
+        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_throttleLast)));
   }
 
   @Override
@@ -145,7 +149,14 @@ public class ActivityBackpressureSamples extends BaseActivity implements
     toggleProgressBar(true);
     sv_container.fullScroll(ScrollView.FOCUS_DOWN);
     tv_sampleDescription.setText(name);
-    tv_itemsRequested.setText(String.valueOf(itemsRequested));
+    //This check is because you can pass a magic number to request, request(Long.MAX_VALUE),
+    //to disable reactive pull backpressure and to ask the Observable to emit items at its own pace.
+    //https://github.com/ReactiveX/RxJava/wiki/Backpressure
+    if (itemsRequested != Long.MAX_VALUE) {
+      tv_itemsRequested.setText(String.valueOf(itemsRequested));
+    } else {
+      tv_itemsRequested.setText("Observable emitting at its own pace");
+    }
   }
 
   @Override public void onOperationProgress(long itemsProcessedSoFar) {

@@ -5,9 +5,9 @@ buildscript {
     mavenLocal()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.1.0'
+    classpath 'com.android.tools.build:gradle:2.2.2'
     classpath 'me.tatarka:gradle-retrolambda:3.2.2'
-    classpath "com.fernandocejas.frodo:frodo-plugin:0.8.1"
+//    classpath "com.fernandocejas.frodo:frodo-plugin:0.8.1"
   }
 }
 
@@ -16,5 +16,19 @@ allprojects {
     jcenter()
     mavenCentral()
     mavenLocal()
+  }
+}
+
+task deployDebug(type: Exec, dependsOn: 'app:installDebug') {
+  def rootDir = project.rootDir
+  def localProperties = new File(rootDir, "local.properties")
+  if (localProperties.exists()) {
+    Properties properties = new Properties()
+    localProperties.withInputStream {
+      inputStream -> properties.load(inputStream)
+    }
+    def sdkDir = properties.getProperty('sdk.dir')
+    def adb = "$sdkDir/platform-tools/adb"
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.fernandocejas.android10.rx.sample/com.fernandocejas.android10.rx.sample.activity.MainActivity'
   }
 }

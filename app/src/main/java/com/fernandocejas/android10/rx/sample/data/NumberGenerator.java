@@ -26,4 +26,12 @@ public class NumberGenerator {
   List<Integer> numbers() {
     return new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10));
   }
+
+  List<Long> numbers(int upUntil) {
+    final ArrayList<Long> numberList = new ArrayList<>(upUntil);
+    for (long i = 0; i < upUntil; i++) {
+      numberList.add(i);
+    }
+    return numberList;
+  }
 }
