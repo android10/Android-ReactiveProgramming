@@ -15,109 +15,103 @@
  */
 package com.fernandocejas.android10.rx.sample.activity.backpressure;
 
-import rx.Producer;
-import rx.Subscriber;
-import rx.exceptions.MissingBackpressureException;
-
+import io.reactivex.subscribers.DisposableSubscriber;
 import java.lang.ref.WeakReference;
 
-//@RxLogSubscriber
-class BackpressureSubscriber<T> extends Subscriber<T> {
+class BackpressureSubscriber<T> extends DisposableSubscriber<T> {
 
-    interface BackPressureResultListener {
-        void onOperationStart(String name, long itemsRequested);
+  interface BackPressureResultListener {
+    void onOperationStart(String name, long itemsRequested);
 
-        void onOperationProgress(long itemsProcessedSoFar);
+    void onOperationProgress(long itemsProcessedSoFar);
 
-        void onOperationResult(long itemsEmitted, OperationResult operation);
+    void onOperationResult(long itemsEmitted, OperationResult operation);
+  }
+
+  private final WeakReference<BackPressureResultListener> backPressureListener;
+  private final String name;
+  private final long itemsRequested;
+  private boolean shouldRequestItem;
+
+  private long itemsEmitted = 0;
+  private long itemsRequestedProcessed = 0;
+
+  BackpressureSubscriber(BackPressureResultListener listener, String name) {
+    this(listener, name, Long.MAX_VALUE);
+  }
+
+  BackpressureSubscriber(BackPressureResultListener listener, String name, long requestedItems) {
+    this.backPressureListener = new WeakReference<>(listener);
+    this.name = name;
+    this.itemsRequested = requestedItems;
+    this.shouldRequestItem = requestedItems != Long.MAX_VALUE;
+  }
+
+  @Override
+  public void onStart() {
+    if (shouldRequestItem) {
+      request(itemsRequested);
     }
+    sendStartData();
+  }
 
-    private final WeakReference<BackPressureResultListener> backPressureListener;
-    private final String name;
-    private final long itemsRequested;
-    private boolean shouldRequestItem;
+  @Override
+  public void onNext(T item) {
+    itemsEmitted++;
+    sendProgressData(itemsEmitted);
+    requestMoreItems();
+  }
 
-    private long itemsEmitted = 0;
-    private long itemsRequestedProcessed = 0;
+  @Override
+  public void onComplete() {
+    sendResultData(OperationResult.success());
+  }
 
-    BackpressureSubscriber(BackPressureResultListener listener, String name) {
-        this(listener, name, Long.MAX_VALUE);
+  @Override
+  public void onError(Throwable throwable) {
+    //if (throwable instanceof MissingBackpressureException) {
+    //    sendResultData(OperationResult.failure(throwable));
+    //}
+  }
+
+  private void requestMoreItems() {
+    itemsRequestedProcessed++;
+    if (shouldRequestItem && itemsRequestedProcessed >= itemsRequested) {
+      request(itemsRequested);
+      itemsRequestedProcessed = 0;
     }
+  }
 
-    BackpressureSubscriber(BackPressureResultListener listener, String name, long requestedItems) {
-        this.backPressureListener = new WeakReference<>(listener);
-        this.name = name;
-        this.itemsRequested = requestedItems;
-        this.shouldRequestItem = requestedItems != Long.MAX_VALUE;
+  private void sendStartData() {
+    if (backPressureListener.get() != null) {
+      backPressureListener.get().onOperationStart(name, itemsRequested);
     }
+  }
 
-    @Override
-    public void onStart() {
-        if (shouldRequestItem) {
-            //setProducer(new QueuedValueProducer<>(this));
-//            setProducer(new BackPressureProducer());
-            request(itemsRequested);
-        }
-        sendStartData();
+  private void sendProgressData(long itemsProcessedSoFar) {
+    if (backPressureListener.get() != null) {
+      backPressureListener.get().onOperationProgress(itemsProcessedSoFar);
     }
+  }
 
-    @Override
-    public void onNext(T item) {
-        itemsEmitted++;
-        sendProgressData(itemsEmitted);
-        requestMoreItems();
+  private void sendResultData(OperationResult operation) {
+    if (backPressureListener.get() != null) {
+      backPressureListener.get().onOperationResult(itemsEmitted, operation);
     }
+  }
 
-    @Override
-    public void onCompleted() {
-        sendResultData(OperationResult.success());
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-        if (throwable instanceof MissingBackpressureException) {
-            sendResultData(OperationResult.failure(throwable));
-        }
-    }
-
-    private void requestMoreItems() {
-        itemsRequestedProcessed++;
-        if (shouldRequestItem && itemsRequestedProcessed >= itemsRequested) {
-            request(itemsRequested);
-            itemsRequestedProcessed = 0;
-        }
-    }
-
-    private void sendStartData() {
-        if (backPressureListener.get() != null) {
-            backPressureListener.get().onOperationStart(name, itemsRequested);
-        }
-    }
-
-    private void sendProgressData(long itemsProcessedSoFar) {
-        if (backPressureListener.get() != null) {
-            backPressureListener.get().onOperationProgress(itemsProcessedSoFar);
-        }
-    }
-
-    private void sendResultData(OperationResult operation) {
-        if (backPressureListener.get() != null) {
-            backPressureListener.get().onOperationResult(itemsEmitted, operation);
-        }
-    }
-
-    private static class BackPressureProducer<T> implements Producer {
-        private final Subscriber<T> subscriber;
-
-        BackPressureProducer(Subscriber subscriber) {
-            this.subscriber = subscriber;
-        }
-
-        @Override
-        public void request(long requested) {
-            for (int i = 0; i < requested && !subscriber.isUnsubscribed(); i++) {
-//                subscriber.onNext(T);
-            }
-        }
-    }
+  //    private static class BackPressureProducer<T> implements Producer {
+  //        private final Subscriber<T> subscriber;
+  //
+  //        BackPressureProducer(Subscriber subscriber) {
+  //            this.subscriber = subscriber;
+  //        }
+  //
+  //        @Override
+  //        public void request(long requested) {
+  //            for (int i = 0; i < requested && !subscriber.isUnsubscribed(); i++) {
+  ////                subscriber.onNext(T);
+  //            }
+  //        }
+  //    }
 }

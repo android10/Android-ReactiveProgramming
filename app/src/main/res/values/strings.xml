@@ -12,7 +12,7 @@
 
   <string name="btn_text_load_sample_observer">Observer Sample</string>
   <string name="btn_text_load_sample_observable_composition">Observable Composition Samples</string>
-  <string name="btn_text_load_sample_backpressure">Backpressure Samples</string>
+  <string name="btn_text_load_sample_backpressure">Backpressure Samples (WIP)</string>
 
   <string name="btn_text_add_element">Add Element</string>
 

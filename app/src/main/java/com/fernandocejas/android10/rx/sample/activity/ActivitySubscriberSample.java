@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2015 android10.org Open Source Project
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,8 +30,6 @@ import com.fernandocejas.android10.rx.sample.data.DataManager;
 import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
 import com.fernandocejas.android10.rx.sample.data.StringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
-import rx.Subscription;
-import rx.subscriptions.Subscriptions;
 
 public class ActivitySubscriberSample extends BaseActivity
     implements ElementsAdapter.ElementAddedListener {
@@ -40,8 +38,6 @@ public class ActivitySubscriberSample extends BaseActivity
 
   private DataManager dataManager;
   private ElementsAdapter adapter;
-
-  private Subscription subscription;
 
   public static Intent getCallingIntent(Context context) {
     return new Intent(context, ActivitySubscriberSample.class);
@@ -59,29 +55,29 @@ public class ActivitySubscriberSample extends BaseActivity
 
   @Override
   protected void onDestroy() {
-    subscription.unsubscribe();
+    adapter.dispose();
     super.onDestroy();
   }
 
   private void initialize() {
-    subscription = Subscriptions.unsubscribed();
-    dataManager = new DataManager(new StringGenerator(), new NumberGenerator(),
-        JobExecutor.getInstance());
+    dataManager =
+        new DataManager(new StringGenerator(), new NumberGenerator(), JobExecutor.getInstance());
     adapter = new ElementsAdapter(this, this);
     rv_elements.setLayoutManager(new LinearLayoutManager(this));
     rv_elements.setAdapter(this.adapter);
   }
 
   private void fillData() {
-    subscription = this.dataManager.elements().subscribe(this.adapter);
+    this.dataManager.elements().subscribe(this.adapter);
   }
 
   @OnClick(android.R.id.button1) void onAddElementClick() {
-    subscription = this.dataManager.newElement().subscribe(this.adapter);
+    this.dataManager.newElement().subscribe(this.adapter);
     Toast.makeText(this, "Element added using an observable!!!", Toast.LENGTH_SHORT).show();
   }
 
-  @Override public void onElementAdded() {
+  @Override
+  public void onElementAdded() {
     rv_elements.smoothScrollToPosition(adapter.getItemCount());
   }
 }

@@ -33,11 +33,10 @@ import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
 import com.fernandocejas.android10.rx.sample.data.StringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import com.fernandocejas.arrow.strings.Strings;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import java.util.concurrent.TimeUnit;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.Subscriptions;
 
 public class ActivityBackpressureSamples extends BaseActivity implements
     BackpressureSubscriber.BackPressureResultListener {
@@ -49,7 +48,7 @@ public class ActivityBackpressureSamples extends BaseActivity implements
   @Bind(R.id.tv_itemsEmitted) TextView tv_itemsEmitted;
   @Bind(R.id.tv_result) TextView tv_result;
 
-  private Subscription subscription;
+  private CompositeDisposable disposables;
   private DataManager dataManager;
 
   public static Intent getCallingIntent(Context context) {
@@ -64,7 +63,7 @@ public class ActivityBackpressureSamples extends BaseActivity implements
 
   @Override
   protected void onDestroy() {
-    subscription.unsubscribe();
+    disposables.dispose();
     super.onDestroy();
   }
 
@@ -75,9 +74,9 @@ public class ActivityBackpressureSamples extends BaseActivity implements
     ButterKnife.bind(this);
     clearUpUI();
 
-    subscription = Subscriptions.unsubscribed();
     dataManager = new DataManager(new StringGenerator(),
         new NumberGenerator(), JobExecutor.getInstance());
+    disposables = new CompositeDisposable();
   }
 
   private void clearUpUI() {
@@ -93,10 +92,6 @@ public class ActivityBackpressureSamples extends BaseActivity implements
   }
 
   @OnClick(R.id.btn_backpressureException) void onBackpressureExceptionClick() {
-    //dataManager.milliseconds(1000)
-    //    .observeOn(AndroidSchedulers.mainThread())
-    //    .subscribeOn(Schedulers.computation())
-    //    .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_exception)));
     dataManager.milliseconds(100)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.computation())
@@ -131,16 +126,16 @@ public class ActivityBackpressureSamples extends BaseActivity implements
     dataManager.milliseconds(1000)
         .toList()
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_toList)));
+        .subscribeOn(Schedulers.computation());
+        //.subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_toList)));
   }
 
   @OnClick(R.id.btn_backpressureThrottleLast) void onBackpressureThrottleLast() {
     dataManager.milliseconds(10000)
         .throttleLast(10, TimeUnit.MILLISECONDS)
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.computation())
-        .subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_throttleLast)));
+        .subscribeOn(Schedulers.computation());
+        //.subscribe(new BackpressureSubscriber<>(this, getString(R.string.btn_text_backpressure_throttleLast)));
   }
 
   @Override
@@ -149,13 +144,10 @@ public class ActivityBackpressureSamples extends BaseActivity implements
     toggleProgressBar(true);
     sv_container.fullScroll(ScrollView.FOCUS_DOWN);
     tv_sampleDescription.setText(name);
-    //This check is because you can pass a magic number to request, request(Long.MAX_VALUE),
-    //to disable reactive pull backpressure and to ask the Observable to emit items at its own pace.
-    //https://github.com/ReactiveX/RxJava/wiki/Backpressure
     if (itemsRequested != Long.MAX_VALUE) {
       tv_itemsRequested.setText(String.valueOf(itemsRequested));
     } else {
-      tv_itemsRequested.setText("Observable emitting at its own pace");
+      tv_itemsRequested.setText("Flowable emitting at its own pace");
     }
   }
 

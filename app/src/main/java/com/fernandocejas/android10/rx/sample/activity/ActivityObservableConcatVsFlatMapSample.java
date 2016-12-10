@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2015 android10.org Open Source Project
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,11 +30,11 @@ import com.fernandocejas.android10.rx.sample.data.NumberGenerator;
 import com.fernandocejas.android10.rx.sample.data.StringGenerator;
 import com.fernandocejas.android10.rx.sample.executor.JobExecutor;
 import com.fernandocejas.arrow.annotations.See;
-import rx.Observable;
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.subscriptions.Subscriptions;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
 @See(ref = "http://fernandocejas.com/2015/01/11/rxjava-observable-tranformation-concatmap-vs-flatmap/")
 public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
@@ -47,7 +47,7 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
   @Bind(R.id.tv_concatMapResult) TextView tv_concatMapResult;
 
   private DataManager dataManager;
-  private Subscription subscription;
+  private CompositeDisposable disposables;
 
   public static Intent getCallingIntent(Context context) {
     return new Intent(context, ActivityObservableConcatVsFlatMapSample.class);
@@ -65,68 +65,75 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
 
   @Override
   protected void onDestroy() {
-    subscription.unsubscribe();
+    disposables.dispose();
     super.onDestroy();
   }
 
   private void initialize() {
-    dataManager = new DataManager(new StringGenerator(), new NumberGenerator(),
-        JobExecutor.getInstance());
-    subscription = Subscriptions.unsubscribed();
+    dataManager = new DataManager(new StringGenerator(), new NumberGenerator(), JobExecutor.getInstance());
+    disposables = new CompositeDisposable();
   }
 
-  @OnClick(R.id.btn_flatMap) void onFlatMapClick() {
-    final Observer<Integer> observer = new Observer<Integer>() {
+  @OnClick(R.id.btn_flatMap)
+  void onFlatMapClick() {
+    final DisposableObserver<Integer> observer = new DisposableObserver<Integer>() {
       final StringBuilder stringBuilder = new StringBuilder(40);
 
-      @Override public void onNext(Integer number) {
+      @Override
+      public void onNext(Integer number) {
         stringBuilder.append(number);
         stringBuilder.append(SEPARATOR);
         debugLog("onFlatMapClick() ------>>>> " + number);
       }
 
-      @Override public void onCompleted() {
+      @Override
+      public void onComplete() {
         stringBuilder.append("Complete!");
         printFlatMapResult(stringBuilder.toString());
         showToast("flatMap() Sequence Completed!!!");
       }
 
-      @Override public void onError(Throwable e) {
+      @Override
+      public void onError(Throwable e) {
         // handle the exception
       }
     };
 
-    buildNumbersObservable()
+    final Observable<Integer> observable = buildNumbersObservable()
         .flatMap(dataManager::squareOfAsync)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(observer);
+        .observeOn(AndroidSchedulers.mainThread());
+    addDisposable(observable.subscribeWith(observer));
   }
 
-  @OnClick(R.id.btn_concatMap) void onConcatMapClick() {
-    final Observer<Integer> observer = new Observer<Integer>() {
+  @OnClick(R.id.btn_concatMap)
+  void onConcatMapClick() {
+    final DisposableObserver<Integer> observer = new DisposableObserver<Integer>() {
       final StringBuilder stringBuilder = new StringBuilder(40);
 
-      @Override public void onNext(Integer number) {
+      @Override
+      public void onNext(Integer number) {
         stringBuilder.append(number);
         stringBuilder.append(SEPARATOR);
         debugLog("onConcatMapClick() ------>>>> " + number);
       }
 
-      @Override public void onCompleted() {
+      @Override
+      public void onComplete() {
         stringBuilder.append("Complete!");
         printConcatMapResult(stringBuilder.toString());
         showToast("concatMap() Sequence Completed!!!");
       }
 
-      @Override public void onError(Throwable e) {
+      @Override
+      public void onError(Throwable e) {
         // handle the exception
       }
     };
 
-    buildNumbersObservable()
+    final Observable<Integer> observable = buildNumbersObservable()
         .concatMap(dataManager::squareOfAsync)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(observer);
+        .observeOn(AndroidSchedulers.mainThread());
+    addDisposable(observable.subscribeWith(observer));
   }
 
   private Observable<Integer> buildNumbersObservable() {
@@ -156,5 +163,9 @@ public class ActivityObservableConcatVsFlatMapSample extends BaseActivity {
       stringBuilder.append(SEPARATOR);
     }
     this.tv_streamOriginalOrder.setText(stringBuilder.toString());
+  }
+
+  private void addDisposable(Disposable disposable) {
+    disposables.add(disposable);
   }
 }

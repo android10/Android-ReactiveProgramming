@@ -25,9 +25,10 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.fernandocejas.android10.rx.sample.R;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.List;
-import rx.Observer;
 
 public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.ElementViewHolder>
     implements Observer<String> {
@@ -41,6 +42,8 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.Elemen
   private final List<String> elements;
   private final LayoutInflater layoutInflater;
   private final ElementAddedListener listener;
+
+  private Disposable disposable;
 
   public ElementsAdapter(Context context, ElementAddedListener listener) {
     if (listener == null) {
@@ -66,11 +69,15 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.Elemen
     return elements.size();
   }
 
+  @Override public void onSubscribe(Disposable disposable) {
+    this.disposable = disposable;
+  }
+
   @Override public void onNext(String stringElement) {
     elements.add(stringElement);
   }
 
-  @Override public void onCompleted() {
+  @Override public void onComplete() {
     notifyDataSetChanged();
     listener.onElementAdded();
   }
@@ -79,10 +86,14 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.Elemen
     Log.e(LOG_TAG, e.getMessage());
   }
 
+  public void dispose() {
+    if (disposable != null && !disposable.isDisposed()) disposable.dispose();
+  }
+
   static class ElementViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.title) TextView textViewText;
 
-    public ElementViewHolder(View itemView) {
+    ElementViewHolder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
     }
